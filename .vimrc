@@ -1,7 +1,8 @@
 "Fixa gvim inställningar
 if has("gui_running")
-  set guifont=Monospace\ 8
+  set guifont=Ubuntu\ Mono\ 9
   set guioptions=aeR
+  colorscheme wombat
 endif
 
 "gör den icke vi-kompatibel
@@ -38,15 +39,14 @@ set number
 filetype on
 filetype plugin indent on
 autocmd FileType css,php set smartindent
-autocmd FileType php colorscheme elflord
-autocmd FileType python colorscheme desert
 autocmd FileType json set tabstop=2
 autocmd FileType json set softtabstop=2
 autocmd FileType json set shiftwidth=2
 autocmd BufNewFile,BufRead *.json set ft=javascript
 
 "phpvariabler
-let g:php_sql_query=1
+let g:php_sql_query=0
+"let g:php_htmlInStrings=1
 let g:php_folding=3
 let g:php_smart_members=1
 let g:php_alt_properties=1
