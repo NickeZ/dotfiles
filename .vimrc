@@ -1,12 +1,18 @@
-"Fixa gvim inställningar
+"GVim
 if has("gui_running")
   set guifont=Ubuntu\ Mono\ 9
   set guioptions=aeR
   colorscheme wombat
 endif
 
-"gör den icke vi-kompatibel
+"Icke VI kompatibel
 set nocompatible
+
+"Visa alltid tab-raden
+set showtabline=2
+
+"Aktivera filtypsidentifiering och inkludera eventuella plugins och indents
+filetype plugin indent on
 
 "Syntax highlighting
 syntax on
@@ -21,46 +27,55 @@ set history=50
 "spara i utf-8
 set encoding=utf-8
 
+"Använd mellanslag för tabbar
+set expandtab
+
 "Hur lång en tab ska va...
 set tabstop=4
 set softtabstop=4 
-set shiftwidth=4
-set expandtab
 
 "indentering
 set autoindent
-
+set shiftwidth=4
 
 "linjaler och radräknare
 set ruler
 set number
 
-"Lite specialare för php
-filetype on
-filetype plugin indent on
-autocmd FileType css,php set smartindent
-autocmd FileType json set tabstop=2
-autocmd FileType json set softtabstop=2
-autocmd FileType json set shiftwidth=2
-autocmd BufNewFile,BufRead *.json set ft=javascript
+">80 column highlight
+highlight OverL ctermbg=darkred ctermfg=white guibg=#FFD9D9
+match OverL /\%>80v.\+/
 
-"phpvariabler
+"PHP
+"autocmd FileType php set smartindent
 let g:php_sql_query=0
 "let g:php_htmlInStrings=1
 let g:php_folding=3
 let g:php_smart_members=1
 let g:php_alt_properties=1
 
-"blandat
+"CSS,JS
+"autocmd FileType css,javascript set smartindent
+
+"C
+"autocmd FileType c set cindent
+autocmd FileType c set tabstop=8
+autocmd FileType c set softtabstop=8 
+autocmd FileType c set shiftwidth=8
+
+"JSON
+"autocmd FileType json set smartindent
+autocmd BufNewFile,BufRead *.json set ft=javascript
+autocmd FileType json set tabstop=2
+autocmd FileType json set softtabstop=2
+autocmd FileType json set shiftwidth=2
+
+"TeX
+let g:tex_flavor='latex'
+let g:Tex_DefaultTargetFormat='pdf'
+
+"netrw
 let g:netrw_browse_split = 3
 let g:netrw_list_hide = '^\..*'
 let g:netrw_altv = 1
 let g:netrw_winsize = 100
-
-"Visa tabbarna
-set showtabline=2
-
-"tex-filer
-filetype plugin on
-let g:tex_flavor='latex'
-let g:Tex_DefaultTargetFormat='pdf'
