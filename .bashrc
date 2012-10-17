@@ -108,3 +108,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 source /home/niklas/git-projekt/bra_skript/git-prompt.sh
+alias xil10=". /opt/Xilinx/10.1/ISE/settings64.sh
+. /opt/Xilinx/10.1/EDK/settings64.sh
+export LD_PRELOAD=/opt/Xilinx/lib/libusb-driver.so"
+alias xil13=". /opt/Xilinx/13.4/ISE_DS/settings64.sh"
+
+alias update='sudo apt-get update && sudo apt-get upgrade -y'
+
+export LD_LIBRARY_PATH=/usr/local/lib

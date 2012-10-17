@@ -1,8 +1,10 @@
 "GVim
 if has("gui_running")
-  set guifont=Ubuntu\ Mono\ 9
+  set guifont=Bitstream\ Vera\ Sans\ Mono\ 8
   set guioptions=aeR
   colorscheme wombat
+else
+  colorscheme desert
 endif
 
 "Icke VI kompatibel
@@ -17,6 +19,9 @@ filetype plugin indent on
 "Syntax highlighting
 syntax on
 set hlsearch
+
+"Highlight current line
+set cursorline
 
 "mus
 set mouse=a
@@ -43,7 +48,7 @@ set ruler
 set number
 
 ">80 column highlight
-highlight OverL ctermbg=darkred ctermfg=white guibg=#FFD9D9
+highlight OverL ctermbg=darkred ctermfg=white guibg=#000000
 match OverL /\%>80v.\+/
 
 "PHP
