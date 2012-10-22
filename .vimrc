@@ -78,6 +78,7 @@ autocmd FileType json set shiftwidth=2
 "TeX
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
+let g:Tex_ViewRule_pdf='evince'
 
 "netrw
 let g:netrw_browse_split = 3
