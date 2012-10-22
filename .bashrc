@@ -107,7 +107,7 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
-source /home/niklas/git-projekt/bra_skript/git-prompt.sh
+. /home/niklas/git/dotfiles/git-prompt.sh
 alias xil10=". /opt/Xilinx/10.1/ISE/settings64.sh
 . /opt/Xilinx/10.1/EDK/settings64.sh
 export LD_PRELOAD=/opt/Xilinx/lib/libusb-driver.so"
