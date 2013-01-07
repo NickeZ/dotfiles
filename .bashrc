@@ -112,7 +112,8 @@ fi
 alias xil10=". /opt/Xilinx/10.1/ISE/settings64.sh
 . /opt/Xilinx/10.1/EDK/settings64.sh
 export LD_PRELOAD=/opt/Xilinx/lib/libusb-driver.so"
-alias xil14=". /opt/Xilinx/14.2/ISE_DS/settings64.sh"
+alias xil13=". /opt/Xilinx/13.4/ISE_DS/settings64.sh"
+alias xil14=". /home/niklas-sl/opt/Xilinx/14.4/ISE_DS/settings64.sh"
 
 alias update='sudo apt-get update && sudo apt-get upgrade -y'
 
