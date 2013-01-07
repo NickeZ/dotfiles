@@ -58,7 +58,7 @@ GIT_PS1_SHOWDIRTYSTATE=1
 if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 "(%s)")\$ '
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1 "(%s)")\$ '
 fi
 #PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
 unset color_prompt force_color_prompt
@@ -112,7 +112,7 @@ fi
 alias xil10=". /opt/Xilinx/10.1/ISE/settings64.sh
 . /opt/Xilinx/10.1/EDK/settings64.sh
 export LD_PRELOAD=/opt/Xilinx/lib/libusb-driver.so"
-alias xil13=". /opt/Xilinx/13.4/ISE_DS/settings64.sh"
+alias xil14=". /opt/Xilinx/14.2/ISE_DS/settings64.sh"
 
 alias update='sudo apt-get update && sudo apt-get upgrade -y'
 

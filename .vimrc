@@ -71,14 +71,15 @@ autocmd FileType c set shiftwidth=8
 "JSON
 "autocmd FileType json set smartindent
 autocmd BufNewFile,BufRead *.json set ft=javascript
-autocmd FileType json set tabstop=2
-autocmd FileType json set softtabstop=2
-autocmd FileType json set shiftwidth=2
+autocmd FileType javascript,json set tabstop=2
+autocmd FileType javascript,json set softtabstop=2
+autocmd FileType javascript,json set shiftwidth=2
 
 "TeX
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_ViewRule_pdf='evince'
+let g:Tex_MultipleCompileFormats='pdf'
 
 "netrw
 let g:netrw_browse_split = 3

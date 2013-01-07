@@ -1,0 +1,13 @@
+*.swp
+slask.php
+*.log
+*.aux
+*.pdf
+*.nav
+*.out
+*.snm
+*.toc
+*#
+*~
+*.pyc
+*.vrb
