@@ -113,8 +113,19 @@ alias xil10=". /opt/Xilinx/10.1/ISE/settings64.sh
 . /opt/Xilinx/10.1/EDK/settings64.sh
 export LD_PRELOAD=/opt/Xilinx/lib/libusb-driver.so"
 alias xil13=". /opt/Xilinx/13.4/ISE_DS/settings64.sh"
-alias xil14=". /home/niklas-sl/opt/Xilinx/14.4/ISE_DS/settings64.sh"
+alias xil14="XIL_CSE_PLUGIN_DIR=/home/niklas-sl/.cse
+. /home/niklas-sl/opt/Xilinx/14.4/ISE_DS/settings64.sh"
 
 alias update='sudo apt-get update && sudo apt-get upgrade -y'
 
 export LD_LIBRARY_PATH=/usr/local/lib
+
+export EDITOR=vim
+
+export LC_ALL="en_US.utf8"
+export LC_TIME="sv_SE.utf8"
+export LC_NUMERIC="sv_SE.utf8"
+export LC_MONETARY="sv_SE.utf8"
+export LC_MEASUREMENT="sv_SE.utf8"
+
+export PATH=${PATH}:/home/niklas-sl/opt/altera/12.1/quartus/bin

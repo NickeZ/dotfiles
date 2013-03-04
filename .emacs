@@ -1,4 +1,4 @@
-(setq load-path (cons (expand-file-name "/home/niklas/.emacs.d/vhdl-mode-3.33.28") load-path))
+(setq load-path (cons (expand-file-name "~/.emacs.d/vhdl-mode-3.33.28") load-path))
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -14,13 +14,13 @@
  '(vhdl-project "EDA385")
  '(vhdl-project-alist (quote (("EDA385" "EDA385" "~/git/eda385/vhdl/simulation/" nil "" (("Xilinx XST 14.2" "\\2" "\\2" nil)) "./" "work" "work/" "Makefile" ""))))
  '(vhdl-reset-kind (quote sync))
- '(vhdl-reset-name "reset_n_i"))
+ '(vhdl-reset-name "rst_i"))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :foundry "unknown" :family "Ubuntu Mono")))))
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 90 :width normal :foundry "unknown" :family "Monospace")))))
 
 (defvar user-temporary-file-directory
   (concat temporary-file-directory user-login-name "/"))
