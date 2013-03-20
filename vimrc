@@ -1,6 +1,6 @@
 "GVim
 if has("gui_running")
-  set guifont=Bitstream\ Vera\ Sans\ Mono\ 8
+  set guifont=Terminus\ 9
   set guioptions=aeR
   colorscheme wombat
 else

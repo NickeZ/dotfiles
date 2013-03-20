@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/home/niklas/git/eracle_core/modules/val/first'
 let g:netrw_dirhist_2='/media/MULTIBOOT'
 let g:netrw_dirhist_3='/home/niklas/git/eracle_core/modules/project_site/data'
@@ -7,3 +7,4 @@ let g:netrw_dirhist_4='/home/niklas/git/eracle_core/modules/menus'
 let g:netrw_dirhist_5='/home/niklas/git/dotfiles'
 let g:netrw_dirhist_6='/home/niklas/git/eracle_core/modules/fotoarkiv'
 let g:netrw_dirhist_7='/home/niklas-sl/src/spotify'
+let g:netrw_dirhist_8='/home/niklas/git/wr/wrpc-sw'
