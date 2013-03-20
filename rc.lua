@@ -37,7 +37,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "x-terminal-emulator"
@@ -54,7 +54,6 @@ modkey = "Mod1"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
-    awful.layout.suit.floating,
     -- awful.layout.suit.tile,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
@@ -66,11 +65,17 @@ layouts =
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.magnifier
+    awful.layout.suit.floating,
 }
 -- }}}
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
+-- tags = {
+  -- names = { "term", "www", "vim", "im", 5, 6, 7, 8, 9},
+  -- layout = { layouts[0], layouts[
+  -- }  
+-- }
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -197,8 +202,8 @@ root.buttons(awful.util.table.join(
 
 -- {{{ Key bindings
 globalkeys = awful.util.table.join(
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
+    -- awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
+    -- awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore),
 
     awful.key({ modkey,           }, "j",
@@ -229,12 +234,17 @@ globalkeys = awful.util.table.join(
 
     -- Standard program
     awful.key({ modkey,           }, "p", function ()
-    awful.util.spawn("dmenu_run -i -p 'Run command:' -nb '" .. 
- 		beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal .. 
-		"' -sb '" .. beautiful.bg_focus .. 
-		"' -sf '" .. beautiful.fg_focus .. "'") 
-	end),
+        awful.util.spawn("dmenu_run -i -p 'Run command:' -nb '" ..
+            beautiful.bg_normal .. "' -nf '" .. beautiful.fg_normal ..
+            "' -sb '" .. beautiful.bg_focus ..
+            "' -sf '" .. beautiful.fg_focus ..
+            "' -fn '-*-terminus-medium-*-*-*-12-*-*-*-*-*-*-*" .. "'")
+        end),
     -- function () awful.util.spawn("dmenu_run") end), -- without customization
+
+    -- Change monitor setting
+    awful.key({ modkey,           }, "F12",   function () awful.util.spawn("monitor_above.sh toggle") end),
+
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
@@ -339,13 +349,14 @@ awful.rules.rules = {
                      border_color = beautiful.border_normal,
                      focus = true,
                      keys = clientkeys,
-                     buttons = clientbuttons } },
+                     buttons = clientbuttons,
+                     size_hints_honor = false} },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
+    { rule = { class = "Pidgin" },
+      properties = { floating = true } }
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { tag = tags[1][2] } },
@@ -385,5 +396,8 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 
 -- Autostart
--- awful.util.spawn_with_shell("run_once.sh xfce4-power-manager")
+awful.util.spawn_with_shell("run_once.sh xfce4-power-manager")
 awful.util.spawn_with_shell("eval `run_once.sh ssh-agent`")
+awful.util.spawn_with_shell("run_once.sh pidgin")
+awful.util.spawn_with_shell("run_once.sh thunderbird")
+awful.util.spawn_with_shell("run_once.sh nm-applet")

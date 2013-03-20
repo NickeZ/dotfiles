@@ -51,6 +51,10 @@ set number
 highlight OverL ctermbg=darkred ctermfg=white guibg=#000000
 match OverL /\%>80v.\+/
 
+"Display trailing characters
+set list
+set listchars=tab:»·,trail:·
+
 "PHP
 "autocmd FileType php set smartindent
 let g:php_sql_query=0
@@ -80,9 +84,14 @@ let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_ViewRule_pdf='evince'
 let g:Tex_MultipleCompileFormats='pdf'
+autocmd FileType tex set textwidth=76
+autocmd FileType tex setlocal spell spelllang=en_gb
 
 "netrw
 let g:netrw_browse_split = 3
 let g:netrw_list_hide = '^\..*'
 let g:netrw_altv = 1
 let g:netrw_winsize = 100
+
+"My aliases
+nnoremap Q gq
