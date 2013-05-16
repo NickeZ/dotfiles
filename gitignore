@@ -11,3 +11,6 @@ slask.php
 *~
 *.pyc
 *.vrb
+*.latexmain
+*.dvi
+*.ps

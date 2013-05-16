@@ -23,10 +23,9 @@ function xil14_init () {
 local OPT=/home/niklas-sl/opt
 XIL_CSE_PLUGIN_DIR=$HOME/.cse
 . $OPT/Xilinx/14.4/ISE_DS/settings64.sh
-XILINX=$OPT/Xilinx/14.4/ISE_DS
 }
 
-alias update='sudo apt-get update && sudo apt-get upgrade -y'
+alias update='sudo apt-get update && sudo apt-get dist-upgrade -y'
 
 export LD_LIBRARY_PATH=/usr/local/lib
 
@@ -37,9 +36,14 @@ export LC_TIME="sv_SE.utf8"
 export LC_NUMERIC="sv_SE.utf8"
 export LC_MONETARY="sv_SE.utf8"
 export LC_MEASUREMENT="sv_SE.utf8"
+export LC_PAPER="sv_SE.utf8"
+export LC_COLLATE="sv_SE.utf8"
 
 alias altera_init="export PATH=${PATH}:/home/niklas-sl/opt/altera/12.1/quartus/bin"
 
 alias make="/usr/bin/make -j 3"
 
 alias lthtunnel="ssh -D 8888 et07nc7@login.student.lth.se"
+
+alias bc="bc -l"
+alias grep="grep --line-number --color=auto"

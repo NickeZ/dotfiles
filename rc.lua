@@ -1,3 +1,4 @@
+Gvicious = require("vicious")
 -- Standard awesome library
 require("awful")
 require("awful.autofocus")
@@ -49,7 +50,8 @@ editor_cmd = terminal .. " -e " .. editor
 -- If you do not like this or do not have such a key,
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
-modkey = "Mod1"
+-- modkey = "Mod1"
+modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
@@ -65,7 +67,7 @@ layouts =
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.magnifier
-    awful.layout.suit.floating,
+    awful.layout.suit.floating
 }
 -- }}}
 
@@ -154,6 +156,69 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end))
 
+-- Create memory text widget
+memwi_t = widget({ type = "textbox" })
+-- Register widget
+vicious.register(memwi_t, vicious.widgets.mem, "$1%", 13)
+
+-- Create memory bar widget
+memwi_b = awful.widget.progressbar()
+-- Progressbar properties
+memwi_b:set_width(8)
+memwi_b:set_height(16)
+memwi_b:set_vertical(true)
+memwi_b:set_background_color("#494B4F")
+memwi_b:set_border_color(nil)
+memwi_b:set_color("#AECF96")
+memwi_b:set_gradient_colors({ "#AECF96", "#88A175", "#FF5656" })
+vicious.register(memwi_b, vicious.widgets.mem, "$1", 13)
+
+-- Create cpy text widget
+-- cpuwi_t = widget({ type = "textbox", width = 20 })
+-- cpuwi_t.width = 30
+-- Register widget
+-- vicious.register(cpuwi_t, vicious.widgets.cpu, "$1%")
+
+-- Create cpy text widget
+oskern_t = widget({ type = "textbox" })
+vicious.register(oskern_t, vicious.widgets.os, "$1 $2")
+
+-- Create cpy text widget
+cpufreq0wi_t = widget({ type = "textbox" })
+cpufreq0wi_t.width = 40
+cpufreq0wi_t.align = "left"
+vicious.register(cpufreq0wi_t, vicious.widgets.cpufreq, " $1", 2, "cpu0")
+
+-- Create cpy text widget
+cpufreq1wi_t = widget({ type = "textbox" })
+cpufreq1wi_t.width = 40
+cpufreq1wi_t.align = "left"
+vicious.register(cpufreq1wi_t, vicious.widgets.cpufreq, " $1", 2, "cpu1")
+
+-- Create CPU bar (Core 0) widget
+cpu0wi_b = awful.widget.graph()
+cpu0wi_b:set_width(50)
+cpu0wi_b:set_background_color("#494B4F")
+cpu0wi_b:set_color("#FF5656")
+cpu0wi_b:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+vicious.register(cpu0wi_b, vicious.widgets.cpu, "$2")
+
+-- Create CPU bar (Core 1) widget
+cpu1wi_b = awful.widget.graph()
+cpu1wi_b:set_width(50)
+cpu1wi_b:set_background_color("#494B4F")
+cpu1wi_b:set_color("#FF5656")
+cpu1wi_b:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+vicious.register(cpu1wi_b, vicious.widgets.cpu, "$3")
+
+-- Create Battery widget
+batwi_t = widget({ type = "textbox" })
+vicious.register(batwi_t, vicious.widgets.bat, "$3", 61, "BAT0")
+
+-- Create separator widget
+separator = widget({ type = "textbox" })
+separator.text = " :: "
+
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
@@ -174,21 +239,65 @@ for s = 1, screen.count() do
                                           end, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 16 })
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = {
-        {
-            mylauncher,
-            mytaglist[s],
-            mypromptbox[s],
-            layout = awful.widget.layout.horizontal.leftright
-        },
-        mylayoutbox[s],
-        mytextclock,
-        s == 1 and mysystray or nil,
-        mytasklist[s],
-        layout = awful.widget.layout.horizontal.rightleft
+            {
+                mylauncher,
+                mytaglist[s],
+                mypromptbox[s],
+                layout = awful.widget.layout.horizontal.leftright
+            },
+            mylayoutbox[s],
+            mytextclock,
+            s == 1 and mysystray or nil,
+            separator,
+            batwi_t,
+            separator,
+            memwi_b.widget,
+            --memwi_t,
+            separator,
+            --cpuwi_t,
+            cpufreq1wi_t,
+            cpu1wi_b.widget,
+            separator,
+            cpufreq0wi_t,
+            cpu0wi_b.widget,
+            separator,
+            oskern_t,
+            mytasklist[s],
+            layout = awful.widget.layout.horizontal.rightleft
     }
+--[[
+    mywibox[s].widgets = {
+        {
+            {
+                mylauncher,
+                mytaglist[s],
+                mypromptbox[s],
+                layout = awful.widget.layout.horizontal.leftright
+            },
+            mylayoutbox[s],
+            mytextclock,
+            s == 1 and mysystray or nil,
+            mytasklist[s],
+            layout = awful.widget.layout.horizontal.rightleft
+        },
+        {
+            {
+                memwi_t,
+                memwi_b,
+                separator,
+                cpuwi_t,
+                cpuwi_b,
+                layout = awful.widget.layout.horizontal.rightleft,
+                height = 12
+            }
+        },
+        layout = awful.widget.layout.vertical.flex,
+        height = mywibox[s].height
+    }
+--]]
 end
 -- }}}
 
@@ -243,7 +352,10 @@ globalkeys = awful.util.table.join(
     -- function () awful.util.spawn("dmenu_run") end), -- without customization
 
     -- Change monitor setting
-    awful.key({ modkey,           }, "F12",   function () awful.util.spawn("monitor_above.sh toggle") end),
+    -- awful.key({ modkey,           }, "F12",   function () awful.util.spawn("monitor_above.sh toggle") end),
+    awful.key({ modkey,           }, "F12",   function () awful.util.spawn("autorandr --change") end),
+    awful.key({ modkey,           }, "F4",   function () awful.util.spawn("poweroff") end),
+    awful.key({ modkey,           }, "s",   function () awful.util.spawn("slock") end),
 
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -355,7 +467,13 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "pinentry" },
       properties = { floating = true } },
+    { rule = { class = "Skype" },
+      properties = { floating = true } },
     { rule = { class = "Pidgin" },
+      properties = { floating = true, tag = tags[1][2] } },
+    { rule = { class = "Thunderbird" },
+      properties = {tag = tags[1][1] } },
+    { rule = { class = "Personal.bin" }, -- BankID
       properties = { floating = true } }
     -- Set Firefox to always map on tags number 2 of screen 1.
     -- { rule = { class = "Firefox" },
@@ -396,8 +514,10 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 
 -- Autostart
-awful.util.spawn_with_shell("run_once.sh xfce4-power-manager")
+awful.util.spawn_with_shell("xfce4-power-manager")
 awful.util.spawn_with_shell("eval `run_once.sh ssh-agent`")
 awful.util.spawn_with_shell("run_once.sh pidgin")
 awful.util.spawn_with_shell("run_once.sh thunderbird")
 awful.util.spawn_with_shell("run_once.sh nm-applet")
+awful.util.spawn_with_shell("autorandr --change")
+awful.util.spawn_with_shell("run_once.sh xautolock -time 10 -locker 'slock'")
