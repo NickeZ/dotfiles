@@ -56,7 +56,7 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
 {
-    -- awful.layout.suit.tile,
+    awful.layout.suit.tile,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
     -- awful.layout.suit.tile.top,
@@ -473,6 +473,8 @@ awful.rules.rules = {
       properties = { floating = true, tag = tags[1][2] } },
     { rule = { class = "Thunderbird" },
       properties = {tag = tags[1][1] } },
+    { rule = { class = "Pavucontrol" },
+      properties = { floating = true } },
     { rule = { class = "Personal.bin" }, -- BankID
       properties = { floating = true } }
     -- Set Firefox to always map on tags number 2 of screen 1.
@@ -514,10 +516,12 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 
 
 -- Autostart
+awful.util.spawn_with_shell("xrdb -merge $HOME/.Xresources")
 awful.util.spawn_with_shell("xfce4-power-manager")
 awful.util.spawn_with_shell("eval `run_once.sh ssh-agent`")
 awful.util.spawn_with_shell("run_once.sh pidgin")
 awful.util.spawn_with_shell("run_once.sh thunderbird")
 awful.util.spawn_with_shell("run_once.sh nm-applet")
+awful.util.spawn_with_shell("pulseaudio -D")
 awful.util.spawn_with_shell("autorandr --change")
 awful.util.spawn_with_shell("run_once.sh xautolock -time 10 -locker 'slock'")

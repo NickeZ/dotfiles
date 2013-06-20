@@ -6,7 +6,7 @@ let &statusline="%f%< %y[%{&fileencoding}/%{&encoding}/%{&termencoding}][%{&file
 
 "GVim
 if has("gui_running")
-  set guifont=Terminus\ 8
+  set guifont=Inconsolata\ Medium\ 10
   set guioptions=aeR
   colorscheme wombat
 else
@@ -93,6 +93,9 @@ let g:Tex_MultipleCompileFormats='pdf, aux'
 let g:Tex_UseMakefile=0
 autocmd FileType tex,rst set textwidth=76
 autocmd FileType tex,rst setlocal spell spelllang=en_gb
+autocmd FileType tex,rst set tabstop=2
+autocmd FileType tex,rst set softtabstop=2
+autocmd FileType tex,rst set shiftwidth=2
 
 "netrw
 let g:netrw_browse_split = 3
