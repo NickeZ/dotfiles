@@ -34,4 +34,4 @@
     ci = commit
     st = status
 [push]
-	default = upstream
+	default = current
