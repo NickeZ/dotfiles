@@ -106,6 +106,9 @@ let g:netrw_winsize = 100
 "My aliases
 nnoremap Q gq
 
+"EPICS db
+au BufRead,BufNewFile *.db setfiletype db
+
 "Functions
 function FT_vhdl()
     setlocal tabstop=2

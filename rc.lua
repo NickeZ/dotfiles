@@ -65,9 +65,9 @@ layouts =
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.floating,
+    awful.layout.suit.max.fullscreen
     -- awful.layout.suit.magnifier
-    awful.layout.suit.floating
 }
 -- }}}
 
@@ -523,5 +523,5 @@ awful.util.spawn_with_shell("run_once.sh pidgin")
 awful.util.spawn_with_shell("run_once.sh thunderbird")
 awful.util.spawn_with_shell("run_once.sh nm-applet")
 awful.util.spawn_with_shell("pulseaudio -D")
-awful.util.spawn_with_shell("autorandr --change")
+-- awful.util.spawn_with_shell("autorandr --change")
 awful.util.spawn_with_shell("run_once.sh xautolock -time 10 -locker 'slock'")
