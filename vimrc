@@ -71,9 +71,20 @@ let g:php_alt_properties=1
 
 "C
 "autocmd FileType c set cindent
-autocmd FileType c,cpp set tabstop=8
-autocmd FileType c,cpp set softtabstop=8 
-autocmd FileType c,cpp set shiftwidth=8
+function TorvaldsStyle()
+        setlocal tabstop=8
+        setlocal softtabstop=8
+        setlocal shiftwidth=8
+endfunction
+
+function CosyStyle()
+        setlocal tabstop=4
+        setlocal softtabstop=4
+        setlocal shiftwidth=4
+endfunction
+
+
+autocmd FileType c,cpp call CosyStyle()
 
 "JSON
 "autocmd FileType json set smartindent
