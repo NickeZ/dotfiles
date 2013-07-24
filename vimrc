@@ -2,7 +2,7 @@
 set nocompatible
 
 "Custom statusline
-let &statusline="%f%< %y[%{&fileencoding}/%{&encoding}/%{&termencoding}][%{&fileformat}](%n)%m%r%w %a%=%b 0x%B  L:%l/%L, C:%-7(%c%V%) %P"
+set statusline="%f%< %y[%{&fileencoding}/%{&encoding}/%{&termencoding}][%{&fileformat}](%n)%m%r%w %a%=%b 0x%B  L:%l/%L, C:%-7(%c%V%) %P"
 
 "GVim
 if has("gui_running")
@@ -39,8 +39,12 @@ set encoding=utf-8
 set expandtab
 
 "Hur lång en tab ska va...
-set tabstop=4
+"set tabstop=4
 set softtabstop=4 
+set expandtab
+
+"Cool completion
+set wildmenu
 
 "indentering
 set autoindent
@@ -49,6 +53,9 @@ set shiftwidth=4
 "linjaler och radräknare
 set ruler
 set number
+
+"höjd på kommandoraden
+set cmdheight=2
 
 ">80 column highlight
 highlight OverL ctermbg=darkred ctermfg=white guibg=#000000
@@ -96,7 +103,7 @@ autocmd FileType javascript,json set shiftwidth=2
 "VHDL
 autocmd Filetype vhdl call FT_vhdl()
 
-"TeX
+"{{{TeX configuration
 let g:Tex_Flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
 let g:Tex_ViewRule_pdf='evince'
@@ -107,6 +114,7 @@ autocmd FileType tex,rst setlocal spell spelllang=en_gb
 autocmd FileType tex,rst set tabstop=2
 autocmd FileType tex,rst set softtabstop=2
 autocmd FileType tex,rst set shiftwidth=2
+"}}}
 
 "netrw
 let g:netrw_browse_split = 3
@@ -114,11 +122,41 @@ let g:netrw_list_hide = '^\..*'
 let g:netrw_altv = 1
 let g:netrw_winsize = 100
 
+"{{{Taglist configuration
+let Tlist_Use_Right_Window = 1
+let Tlist_Enable_Fold_Column = 0
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Use_SingleClick = 1
+let Tlist_Inc_Winwidth = 0
+"}}}
+
 "My aliases
 nnoremap Q gq
 
+"Använd F11 för att toggla mellan paste, no-paste
+set pastetoggle=<F10>
+" Open the Project Plugin <F2>
+nnoremap <silent> <F2> :Project<CR>
+
+" Open the TagList Plugin <F3>
+nnoremap <silent> <F3> :Tlist<CR>
+
+" Space will toggle folds!
+nnoremap <space> za
+
+" Search mappings: These will make it so that going to the next one in a
+" search will center on the line it's found in.
+map N Nzz
+map n nzz
+
 "EPICS db
 au BufRead,BufNewFile *.db setfiletype db
+
+" Enable backup
+set backup
+set backupdir=~/.vim/backup
+" Put swapfiles in tmpfolder
+set directory=~/.vim/tmp
 
 "Functions
 function FT_vhdl()
