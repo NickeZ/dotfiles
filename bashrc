@@ -1,7 +1,7 @@
 ## Git prompt config
 GIT_PS1_SHOWUPSTREAM="auto"
 GIT_PS1_SHOWDIRTYSTATE=1
-. /home/niklas/git/dotfiles/git-prompt.sh
+source $HOME/git/dotfiles/git-prompt.sh
 
 ## Bash config
 HISTSIZE=5000
