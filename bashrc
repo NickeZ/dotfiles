@@ -47,3 +47,4 @@ alias lthtunnel="ssh -D 8888 et07nc7@login.student.lth.se"
 
 alias bc="bc -l"
 alias grep="grep --line-number --color=auto"
+export LESS=RS
