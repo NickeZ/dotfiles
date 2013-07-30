@@ -80,29 +80,31 @@ let g:php_alt_properties=1
 " Automatically change to folder of file
 set autochdir
 
-"C
-"autocmd FileType c set cindent
+"TorvadsStyle
+"8 spaces indent
 function TorvaldsStyle()
         setlocal tabstop=8
         setlocal softtabstop=8
         setlocal shiftwidth=8
 endfunction
 
-function CosyStyle()
-        setlocal tabstop=4
-        setlocal softtabstop=4
-        setlocal shiftwidth=4
+"CosyStyleCPP
+"2 spaces indent
+function CosyStyleCPP()
+        setlocal tabstop=2
+        setlocal softtabstop=2
+        setlocal shiftwidth=2
 endfunction
 
-
-autocmd FileType c,cpp call TorvaldsStyle()
+"Define indent for different sources
+autocmd FileType c   call TorvaldsStyle()
+autocmd FileType cpp call CosyStyleCPP()
+autocmd FileType c,cpp autocmd BufWritePre <buffer> :%s/\s\+$//e
 
 "JSON
 "autocmd FileType json set smartindent
 autocmd BufNewFile,BufRead *.json set ft=javascript
-autocmd FileType javascript,json set tabstop=2
-autocmd FileType javascript,json set softtabstop=2
-autocmd FileType javascript,json set shiftwidth=2
+autocmd FileType javascript,json call CosyStyleCPP()
 
 "VHDL
 autocmd Filetype vhdl call FT_vhdl()

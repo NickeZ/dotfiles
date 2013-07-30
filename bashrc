@@ -41,9 +41,11 @@ export LC_COLLATE="sv_SE.utf8"
 
 alias altera_init="export PATH=${PATH}:/home/niklas-sl/opt/altera/12.1/quartus/bin"
 
-alias make="/usr/bin/make -j 3"
+#alias make="/usr/bin/make -j 3"
 
 alias lthtunnel="ssh -D 8888 et07nc7@login.student.lth.se"
 
 alias bc="bc -l"
 alias grep="grep --line-number --color=auto"
+
+alias indentCosy="indent -linux -i2 -nut"
