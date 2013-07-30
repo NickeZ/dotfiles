@@ -49,3 +49,4 @@ alias bc="bc -l"
 alias grep="grep --line-number --color=auto"
 
 alias indentCosy="indent -linux -i2 -nut"
+export LESS=RS
