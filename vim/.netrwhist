@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/niklas/git/wr/wr-timing/modules/sgb_common'
-let g:netrw_dirhist_2='/home/ess/svn/nclaesson/EPICS/ioc/iocBoot'
-let g:netrw_dirhist_3='/home/ess/svn/nclaesson/EPICS/ioc/iocBoot/.svn'
-let g:netrw_dirhist_4='/home/ess/git/epic-task12/dacApp/task12App/src'

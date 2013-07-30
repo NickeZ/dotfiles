@@ -76,11 +76,26 @@ let g:php_alt_properties=1
 "CSS,JS
 "autocmd FileType css,javascript set smartindent
 
+
+" Automatically change to folder of file
+set autochdir
+
 "C
 "autocmd FileType c set cindent
-autocmd FileType c,cpp set tabstop=8
-autocmd FileType c,cpp set softtabstop=8 
-autocmd FileType c,cpp set shiftwidth=8
+function TorvaldsStyle()
+        setlocal tabstop=8
+        setlocal softtabstop=8
+        setlocal shiftwidth=8
+endfunction
+
+function CosyStyle()
+        setlocal tabstop=4
+        setlocal softtabstop=4
+        setlocal shiftwidth=4
+endfunction
+
+
+autocmd FileType c,cpp call TorvaldsStyle()
 
 "JSON
 "autocmd FileType json set smartindent
@@ -106,10 +121,11 @@ autocmd FileType tex,rst set shiftwidth=2
 "}}}
 
 "netrw
-let g:netrw_browse_split = 3
+let g:netrw_browse_split = 2
 let g:netrw_list_hide = '^\..*'
 let g:netrw_altv = 1
 let g:netrw_winsize = 100
+let g:netrw_liststyle = 3
 
 "{{{Taglist configuration
 let Tlist_Use_Right_Window = 1
@@ -117,6 +133,7 @@ let Tlist_Enable_Fold_Column = 0
 let Tlist_Exit_OnlyWindow = 1
 let Tlist_Use_SingleClick = 1
 let Tlist_Inc_Winwidth = 0
+let Tlist_Auto_Open = 1
 "}}}
 
 "My aliases
