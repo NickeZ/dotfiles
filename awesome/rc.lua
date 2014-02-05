@@ -185,15 +185,15 @@ vicious.register(oskern_t, vicious.widgets.os, "$1 $2")
 
 -- Create cpy text widget
 cpufreq0wi_t = widget({ type = "textbox" })
-cpufreq0wi_t.width = 40
+cpufreq0wi_t.width = 75
 cpufreq0wi_t.align = "left"
-vicious.register(cpufreq0wi_t, vicious.widgets.cpufreq, " $1", 2, "cpu0")
+vicious.register(cpufreq0wi_t, vicious.widgets.cpufreq, " $2 GHz $5", 2, "cpu0")
 
 -- Create cpy text widget
 cpufreq1wi_t = widget({ type = "textbox" })
-cpufreq1wi_t.width = 40
+cpufreq1wi_t.width = 75
 cpufreq1wi_t.align = "left"
-vicious.register(cpufreq1wi_t, vicious.widgets.cpufreq, " $1", 2, "cpu1")
+vicious.register(cpufreq1wi_t, vicious.widgets.cpufreq, " $2 Ghz $5", 2, "cpu1") 
 
 -- Create CPU bar (Core 0) widget
 cpu0wi_b = awful.widget.graph()
@@ -213,7 +213,7 @@ vicious.register(cpu1wi_b, vicious.widgets.cpu, "$3")
 
 -- Create Battery widget
 batwi_t = widget({ type = "textbox" })
-vicious.register(batwi_t, vicious.widgets.bat, "$3", 61, "BAT0")
+vicious.register(batwi_t, vicious.widgets.bat, "$1 $2%", 61, "BAT0")
 
 -- Create separator widget
 separator = widget({ type = "textbox" })
@@ -524,4 +524,4 @@ awful.util.spawn_with_shell("run_once.sh thunderbird")
 awful.util.spawn_with_shell("run_once.sh nm-applet")
 awful.util.spawn_with_shell("pulseaudio -D")
 -- awful.util.spawn_with_shell("autorandr --change")
-awful.util.spawn_with_shell("run_once.sh xautolock -time 10 -locker 'slock'")
+-- awful.util.spawn_with_shell("run_once.sh xautolock -time 10 -locker 'slock'")
