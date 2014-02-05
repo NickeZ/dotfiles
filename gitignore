@@ -7,6 +7,9 @@ slask.php
 *.out
 *.snm
 *.toc
+*.fls
+*.bib
+*.bcf
 *#
 *~
 *.pyc
@@ -16,3 +19,4 @@ slask.php
 *.ps
 *.a
 *.so
+*.autosave
