@@ -11,6 +11,16 @@ require("naughty")
 -- Load Debian menu entries
 require("debian.menu")
 
+-- Override awesome.quit when we're using GNOME
+_awesome_quit = awesome.quit
+awesome.quit = function()
+    if os.getenv("DESKTOP_SESSION") == "awesome-gnome" then
+        os.execute("/usr/bin/gnome-session-quit")
+    else
+        _awesome_quit()
+    end
+end
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -44,6 +54,7 @@ beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 terminal = "x-terminal-emulator"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
+shutdown = "/usr/bin/gnome-session-quit --power-off"
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -354,12 +365,13 @@ globalkeys = awful.util.table.join(
     -- Change monitor setting
     -- awful.key({ modkey,           }, "F12",   function () awful.util.spawn("monitor_above.sh toggle") end),
     awful.key({ modkey,           }, "F12",   function () awful.util.spawn("autorandr --change") end),
-    awful.key({ modkey,           }, "F4",   function () awful.util.spawn("poweroff") end),
+    awful.key({ modkey,           }, "F4",   function () awful.util.spawn("dbus-send --system --print-reply --dest='org.freedesktop.UPower' /org/freedesktop/UPower org.freedesktop.UPower.Hibernate") end),
     awful.key({ modkey,           }, "s",   function () awful.util.spawn("slock") end),
 
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
+    awful.key({ modkey, "Shift"   }, "p", function () os.execute(shutdown) end),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
@@ -468,9 +480,11 @@ awful.rules.rules = {
     { rule = { class = "pinentry" },
       properties = { floating = true } },
     { rule = { class = "Skype" },
-      properties = { floating = true } },
+      properties = { floating = true, tag = tags[1][2] } },
     { rule = { class = "Pidgin" },
       properties = { floating = true, tag = tags[1][2] } },
+    { rule = { class = "com-cosylab-timespent-TimeSpentMain" },
+      properties = { floating = true, tag = tags[1][3] } },
     { rule = { class = "Thunderbird" },
       properties = {tag = tags[1][1] } },
     { rule = { class = "Pavucontrol" },
@@ -514,14 +528,14 @@ client.add_signal("focus", function(c) c.border_color = beautiful.border_focus e
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-
 -- Autostart
 awful.util.spawn_with_shell("xrdb -merge $HOME/.Xresources")
-awful.util.spawn_with_shell("xfce4-power-manager")
-awful.util.spawn_with_shell("eval `run_once.sh ssh-agent`")
-awful.util.spawn_with_shell("run_once.sh pidgin")
-awful.util.spawn_with_shell("run_once.sh thunderbird")
-awful.util.spawn_with_shell("run_once.sh nm-applet")
-awful.util.spawn_with_shell("pulseaudio -D")
+-- awful.util.spawn_with_shell("run_once.sh /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
+-- awful.util.spawn_with_shell("xfce4-power-manager")
+-- awful.util.spawn_with_shell("eval `run_once.sh ssh-agent`")
+-- awful.util.spawn_with_shell("run_once.sh pidgin")
+-- awful.util.spawn_with_shell("run_once.sh thunderbird")
+-- awful.util.spawn_with_shell("run_once.sh nm-applet")
+-- awful.util.spawn_with_shell("pulseaudio -D")
 -- awful.util.spawn_with_shell("autorandr --change")
 -- awful.util.spawn_with_shell("run_once.sh xautolock -time 10 -locker 'slock'")

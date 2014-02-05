@@ -50,3 +50,5 @@ alias grep="grep --line-number --color=auto"
 
 alias indentCosy="indent -linux -i2 -nut"
 export LESS=RS
+
+alias evnova="WINEPREFIX=$HOME/.wine_evnova wine start \"$HOME/.wine_evnova/drive_c/users/niklas/Start Menu/Programs/EV Nova/EV Nova.lnk\""
