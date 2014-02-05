@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=xfce4-power-manager --no-daemon
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Power manager
+Name=Power manager
+Comment[en_US]=
+Comment=
