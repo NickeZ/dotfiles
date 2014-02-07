@@ -31,6 +31,8 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 export EDITOR=vim
 
+PATH=$PATH:/usr/NX/bin
+
 #export LC_ALL="en_US.utf8"
 export LC_TIME="sv_SE.utf8"
 export LC_NUMERIC="sv_SE.utf8"

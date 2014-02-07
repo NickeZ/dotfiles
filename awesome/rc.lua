@@ -222,9 +222,13 @@ cpu1wi_b:set_color("#FF5656")
 cpu1wi_b:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
 vicious.register(cpu1wi_b, vicious.widgets.cpu, "$3")
 
--- Create Battery widget
+-- Create Battery widgetfor BAT0
 batwi_t = widget({ type = "textbox" })
 vicious.register(batwi_t, vicious.widgets.bat, "$1 $2%", 61, "BAT0")
+
+-- Create Battery widget for BAT1
+batw2_t = widget({ type = "textbox" })
+vicious.register(batw2_t, vicious.widgets.bat, "$1 $2%", 61, "BAT1")
 
 -- Create separator widget
 separator = widget({ type = "textbox" })
@@ -264,6 +268,7 @@ for s = 1, screen.count() do
             s == 1 and mysystray or nil,
             separator,
             batwi_t,
+            batw2_t,
             separator,
             memwi_b.widget,
             --memwi_t,
