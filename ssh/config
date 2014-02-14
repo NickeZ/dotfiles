@@ -6,6 +6,7 @@ HostName mojt.esek.lth.se
 User teknokrat
 
 host wrcomputer
+HostName 10.5.3.198
 user white
 
 host wrswitch

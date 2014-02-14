@@ -1,10 +1,11 @@
 [Desktop Entry]
+Name=Skype
+Comment=Skype Internet Telephony
+Exec=env PULSE_LATENCY_MSEC=60 skype %U
+Icon=skype.png
+Terminal=false
 Type=Application
-Exec=skype
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name[en_US]=skype
-Name=skype
-Comment[en_US]=
-Comment=
+Encoding=UTF-8
+Categories=Network;Application;
+MimeType=x-scheme-handler/skype;
+X-KDE-Protocols=skype
