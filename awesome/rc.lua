@@ -170,7 +170,7 @@ mytasklist.buttons = awful.util.table.join(
 -- Create memory text widget
 memwi_t = widget({ type = "textbox" })
 -- Register widget
-vicious.register(memwi_t, vicious.widgets.mem, "$1%", 13)
+vicious.register(memwi_t, vicious.widgets.mem, " $4 MB ", 13)
 
 -- Create memory bar widget
 memwi_b = awful.widget.progressbar()
@@ -270,8 +270,8 @@ for s = 1, screen.count() do
             batwi_t,
             batw2_t,
             separator,
+            memwi_t,
             memwi_b.widget,
-            --memwi_t,
             separator,
             --cpuwi_t,
             cpufreq1wi_t,
