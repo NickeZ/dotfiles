@@ -170,7 +170,7 @@ mytasklist.buttons = awful.util.table.join(
 -- Create memory text widget
 memwi_t = widget({ type = "textbox" })
 -- Register widget
-vicious.register(memwi_t, vicious.widgets.mem, " $4 MB ", 13)
+vicious.register(memwi_t, vicious.widgets.mem, " $4/$3 MB ", 13)
 
 -- Create memory bar widget
 memwi_b = awful.widget.progressbar()
@@ -194,18 +194,6 @@ vicious.register(memwi_b, vicious.widgets.mem, "$1", 13)
 oskern_t = widget({ type = "textbox" })
 vicious.register(oskern_t, vicious.widgets.os, "$1 $2")
 
--- Create cpy text widget
-cpufreq0wi_t = widget({ type = "textbox" })
-cpufreq0wi_t.width = 75
-cpufreq0wi_t.align = "left"
-vicious.register(cpufreq0wi_t, vicious.widgets.cpufreq, " $2 GHz $5", 2, "cpu0")
-
--- Create cpy text widget
-cpufreq1wi_t = widget({ type = "textbox" })
-cpufreq1wi_t.width = 75
-cpufreq1wi_t.align = "left"
-vicious.register(cpufreq1wi_t, vicious.widgets.cpufreq, " $2 Ghz $5", 2, "cpu1") 
-
 -- Create CPU bar (Core 0) widget
 cpu0wi_b = awful.widget.graph()
 cpu0wi_b:set_width(50)
@@ -221,6 +209,22 @@ cpu1wi_b:set_background_color("#494B4F")
 cpu1wi_b:set_color("#FF5656")
 cpu1wi_b:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
 vicious.register(cpu1wi_b, vicious.widgets.cpu, "$3")
+
+-- Create CPU bar (Core 2) widget
+cpu2wi_b = awful.widget.graph()
+cpu2wi_b:set_width(50)
+cpu2wi_b:set_background_color("#494B4F")
+cpu2wi_b:set_color("#FF5656")
+cpu2wi_b:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+vicious.register(cpu2wi_b, vicious.widgets.cpu, "$4")
+
+-- Create CPU bar (Core 3) widget
+cpu3wi_b = awful.widget.graph()
+cpu3wi_b:set_width(50)
+cpu3wi_b:set_background_color("#494B4F")
+cpu3wi_b:set_color("#FF5656")
+cpu3wi_b:set_gradient_colors({ "#FF5656", "#88A175", "#AECF96" })
+vicious.register(cpu3wi_b, vicious.widgets.cpu, "$5")
 
 -- Create Battery widgetfor BAT0
 batwi_t = widget({ type = "textbox" })
@@ -273,11 +277,12 @@ for s = 1, screen.count() do
             memwi_t,
             memwi_b.widget,
             separator,
-            --cpuwi_t,
-            cpufreq1wi_t,
+            cpu3wi_b.widget,
+            separator,
+            cpu2wi_b.widget,
+            separator,
             cpu1wi_b.widget,
             separator,
-            cpufreq0wi_t,
             cpu0wi_b.widget,
             separator,
             oskern_t,
