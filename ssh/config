@@ -9,18 +9,15 @@ host wrcomputer
 HostName 10.5.3.198
 user white
 
-host wrswitch
-user root
-
 host ess-dev
 HostName 10.5.3.207
 user nclaesson
 
-host ess-srv1
+host ess-srv1.local
 HostName 10.5.3.134
 user ess-dev
 
-host ess-srv2
+host ess-srv2.local
 HostName 10.5.3.135
 user ess-dev
 
@@ -33,3 +30,12 @@ GSSAPIAuthentication no
 
 host review.simosy.se
 port 29418
+
+host raon
+HostName 10.5.3.88
+user raon-dev
+ForwardAgent yes
+
+host controlbox.esss.lu.se controlbox-cpci1-cpu.esss.lu.se controlbox-cpci2-cpu.esss.lu.se
+ForwardAgent yes
+user ess-dev
