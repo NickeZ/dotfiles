@@ -5,11 +5,11 @@ host mojt
 HostName mojt.esek.lth.se
 User teknokrat
 
-host wrcomputer
+host wrcomputer.local
 HostName 10.5.3.198
 user white
 
-host ess-dev
+host ess-dev.local
 HostName 10.5.3.207
 user nclaesson
 
@@ -38,4 +38,4 @@ ForwardAgent yes
 
 host controlbox.esss.lu.se controlbox-cpci1-cpu.esss.lu.se controlbox-cpci2-cpu.esss.lu.se
 ForwardAgent yes
-user ess-dev
+user nclaesson
