@@ -167,6 +167,7 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end))
 
+
 -- Create memory text widget
 memwi_t = widget({ type = "textbox" })
 -- Register widget
@@ -238,6 +239,12 @@ vicious.register(batw2_t, vicious.widgets.bat, "$1 $2%", 61, "BAT1")
 separator = widget({ type = "textbox" })
 separator.text = " :: "
 
+-- Volume indicator
+-- Load the widget.
+
+-- Example: Add to wibox. Here to the right. Do it the way you like it.
+--right_layout:add(APW)
+
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt({ layout = awful.widget.layout.horizontal.leftright })
@@ -258,8 +265,9 @@ for s = 1, screen.count() do
                                           end, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 16 })
+    mywibox[s] = awful.wibox({ position = "top", screen = s, height = 20 })
     -- Add widgets to the wibox - order matters
+    --local APW = require("apw/widget")
     mywibox[s].widgets = {
             {
                 mylauncher,
@@ -269,6 +277,7 @@ for s = 1, screen.count() do
             },
             mylayoutbox[s],
             mytextclock,
+            --APW,
             s == 1 and mysystray or nil,
             separator,
             batwi_t,
@@ -289,6 +298,9 @@ for s = 1, screen.count() do
             mytasklist[s],
             layout = awful.widget.layout.horizontal.rightleft
     }
+    --APWTimer = timer({ timeout = 0.5 }) -- set update interval in s
+    --APWTimer:connect_signal("timeout", APW.Update)
+    --APWTimer:start()
 --[[
     mywibox[s].widgets = {
         {
@@ -498,10 +510,12 @@ awful.rules.rules = {
     { rule = { class = "com-cosylab-timespent-TimeSpentMain" },
       properties = { floating = true, tag = tags[1][8] } },
     { rule = { class = "Spotify" },
-      properties = { floating = true, tag = tags[1][9] } },
+      properties = { tag = tags[1][9] } },
     { rule = { class = "Thunderbird" },
-      properties = {tag = tags[1][1] } },
+      properties = { tag = tags[1][1] } },
     { rule = { class = "Pavucontrol" },
+      properties = { floating = true } },
+    { rule = { class = "x2goclient" },
       properties = { floating = true } },
     { rule = { class = "Personal.bin" }, -- BankID
       properties = { floating = true } }
