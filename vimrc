@@ -1,12 +1,22 @@
+"Enable pathogen
+call pathogen#infect()
+call pathogen#helptags()
+
 "Icke VI kompatibel (måste vara först, ändrar inställningar)
 set nocompatible
 
 "Custom statusline
-set statusline="%f%< %y[%{&fileencoding}/%{&encoding}/%{&termencoding}][%{&fileformat}](%n)%m%r%w %a%=%b 0x%B  L:%l/%L, C:%-7(%c%V%) %P"
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+set laststatus=2
+set fillchars+=stl:\ ,stlnc:\
+"set statusline="%f%< %y[%{&fileencoding}/%{&encoding}/%{&termencoding}][%{&fileformat}](%n)%m%r%w %a%=%b 0x%B  L:%l/%L, C:%-7(%c%V%) %P"
+"höjd på kommandoraden
+"set cmdheight=2
 
 "GVim
 if has("gui_running")
-  set guifont=Inconsolata\ Medium\ 10
+  "set guifont=Inconsolata\ Medium\ 10
+  set guifont=Inconsolata\ for\ Powerline\ Medium\ 10
   set guioptions=aeR
   colorscheme wombat
 else
@@ -54,16 +64,13 @@ set shiftwidth=4
 set ruler
 set number
 
-"höjd på kommandoraden
-set cmdheight=2
-
-">80 column highlight
+">120 column highlight
 highlight OverL ctermbg=darkred ctermfg=white guibg=#000000
-match OverL /\%>80v.\+/
+match OverL /\%>120v.\+/
 
 "Display trailing characters
 set list
-set listchars=tab:»·,trail:·
+set listchars=nbsp:¬,tab:»·,trail:·
 
 "PHP
 "autocmd FileType php set smartindent
@@ -86,6 +93,7 @@ function TorvaldsStyle()
         setlocal tabstop=8
         setlocal softtabstop=8
         setlocal shiftwidth=8
+        setlocal textwidth=80
 endfunction
 
 "CosyStyleCPP
@@ -94,7 +102,12 @@ function CosyStyleCPP()
         setlocal tabstop=2
         setlocal softtabstop=2
         setlocal shiftwidth=2
+        setlocal textwidth=120
 endfunction
+
+
+"Markdown
+autocmd BufNewFile,BufRead *.md set ft=pandoc
 
 "Define indent for different sources
 autocmd FileType c   call TorvaldsStyle()
@@ -159,7 +172,7 @@ map N Nzz
 map n nzz
 
 "EPICS db
-au BufRead,BufNewFile *.db setfiletype db
+"au BufRead,BufNewFile *.db setfiletype db
 
 " Enable backup
 set backup

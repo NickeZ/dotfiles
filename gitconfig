@@ -3,6 +3,8 @@
     email=nicke.claesson@gmail.com
 [core]
     excludesfile = ~/.gitignore
+    eol = lf
+    autocrlf = input
 
 [color]
     branch = auto

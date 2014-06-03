@@ -48,3 +48,8 @@ host raonlaptop
 HostName 10.5.2.67
 ForwardAgent yes
 user raon-dev
+
+host cosyVirtual
+hostName 10.5.1.89
+ForwardAgent yes
+user root
