@@ -108,6 +108,7 @@ endfunction
 
 "Markdown
 autocmd BufNewFile,BufRead *.md set ft=pandoc
+let g:pandoc_use_conceal=0
 
 "Define indent for different sources
 autocmd FileType c   call TorvaldsStyle()

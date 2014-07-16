@@ -40,7 +40,7 @@ HostName 10.5.3.88
 user raon-dev
 ForwardAgent yes
 
-host controlbox.esss.lu.se controlbox-cpci1-cpu.esss.lu.se controlbox-cpci2-cpu.esss.lu.se mtcacpu1.esss.lu.se
+host controlbox.esss.lu.se controlbox-cpci1-cpu.esss.lu.se controlbox-cpci2-cpu.esss.lu.se mtcacpu1.esss.lu.se icsutcacrate.esss.lu.se
 ForwardAgent yes
 user nclaesson
 
