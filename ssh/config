@@ -49,12 +49,12 @@ HostName 10.5.2.67
 ForwardAgent yes
 user raon-dev
 
-host cosyBuildSlave01
-hostName 10.5.1.137
+host codac41buildnode
+hostName 10.5.3.124
 ForwardAgent yes
 user nclaesson
 
-host cosyBuildSlave02
-HostName 10.5.2.165
+host codac43buildnode
+HostName 10.5.3.123
 ForwardAgent yes
-user root
+user codac-dev

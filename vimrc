@@ -85,7 +85,7 @@ let g:php_alt_properties=1
 
 
 " Automatically change to folder of file
-set autochdir
+" set autochdir
 
 "TorvadsStyle
 "8 spaces indent
@@ -145,12 +145,12 @@ let g:netrw_winsize = 100
 let g:netrw_liststyle = 3
 
 "{{{Taglist configuration
-let Tlist_Use_Right_Window = 1
-let Tlist_Enable_Fold_Column = 0
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Use_SingleClick = 1
-let Tlist_Inc_Winwidth = 0
-let Tlist_Auto_Open = 1
+"let Tlist_Use_Right_Window = 1
+"let Tlist_Enable_Fold_Column = 0
+"let Tlist_Exit_OnlyWindow = 1
+"let Tlist_Use_SingleClick = 1
+"let Tlist_Inc_Winwidth = 0
+"let Tlist_Auto_Open = 1
 "}}}
 
 "My aliases
