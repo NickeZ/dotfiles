@@ -8,7 +8,7 @@ source $HOME/git/dotfiles/git-prompt.sh
 HISTSIZE=5000
 HISTFILESIZE=10000
 
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u \[\033[01;34m\]@ \[\033[01;35m\]\h\[\033[00m\] : \[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 "(%s)")\n\$ '
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u \[\033[01;34m\]@ \[\033[01;35m\]\h\[\033[00m\] : \[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n\$ '
 unset color_prompt force_color_prompt
 
 alias xil10_init=""
