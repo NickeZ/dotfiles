@@ -1,60 +1,74 @@
+host *
+    ServerAliveInterval 300
+    ServerAliveCountMax 2
+    GSSAPIAuthentication no
+
 host bjartmarhylta
-HostName 213.185.18.6
-ForwardAgent yes
+    HostName 213.185.18.6
+    ForwardAgent yes
 
 host hacke
-HostName hacke.esek.lth.se
+    HostName hacke.esek.lth.se
 
 host mojt
-HostName mojt.esek.lth.se
-User teknokrat
+    HostName mojt.esek.lth.se
+    User teknokrat
 
 host wrcomputer.local
-HostName 10.5.3.198
-user white
+    HostName 10.5.3.198
+    user white
 
 host ess-dev.local
-HostName 10.5.3.207
-user nclaesson
+    HostName 10.5.3.207
+    user nclaesson
 
 host ess-srv1.local
-HostName 10.5.3.134
-user ess-dev
+    HostName 10.5.3.134
+    user ess-dev
 
 host ess-srv2.local
-HostName 10.5.3.135
-user ess-dev
+    HostName 10.5.3.135
+    user ess-dev
 
 host login.cosylab.com
-user nclaesson
-port 54321
-
-host *
-GSSAPIAuthentication no
+    user nclaesson
+    port 54321
 
 host review.simosy.se
-port 29418
+    port 29418
 
 host raon
-HostName 10.5.3.88
-user raon-dev
-ForwardAgent yes
+    HostName 10.5.3.88
+    user raon-dev
+    ForwardAgent yes
 
-host controlbox.esss.lu.se controlbox-cpci1-cpu.esss.lu.se controlbox-cpci2-cpu.esss.lu.se mtcacpu1.esss.lu.se icsutcacrate.esss.lu.se
-ForwardAgent yes
-user nclaesson
+host ics-utca1-cpu1
+    HostName 10.4.3.210
+
+host ics-cpci1-cpu1
+    HostName 10.4.3.220
+
+host ics-cpci2-cpu1
+    HostName 10.4.3.230
+
+host ics-cpci3-cpu1
+    HostName 10.4.3.240
+
+host ics*
+    ForwardAgent yes
+    user nclaesson
 
 host raonlaptop
-HostName 10.5.2.67
-ForwardAgent yes
-user raon-dev
+    HostName 10.5.2.67
+    ForwardAgent yes
+    user raon-dev
 
 host codac41buildnode
-hostName 10.5.3.124
-ForwardAgent yes
-user nclaesson
+    hostName 10.5.3.124
+    ForwardAgent yes
+    user nclaesson
 
 host codac43buildnode
-HostName 10.5.3.123
-ForwardAgent yes
-user codac-dev
+    HostName 10.5.3.123
+    ForwardAgent yes
+    user codac-dev

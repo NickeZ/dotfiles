@@ -388,7 +388,7 @@ globalkeys = awful.util.table.join(
     -- awful.key({ modkey,           }, "F12",   function () awful.util.spawn("monitor_above.sh toggle") end),
     awful.key({ modkey,           }, "F12",   function () awful.util.spawn("autorandr --change") end),
     awful.key({ modkey,           }, "F4",   function () awful.util.spawn("dbus-send --system --print-reply --dest='org.freedesktop.UPower' /org/freedesktop/UPower org.freedesktop.UPower.Hibernate") end),
-    awful.key({ modkey,           }, "s",   function () awful.util.spawn("slock") end),
+    awful.key({ modkey,           }, "s",   function () awful.util.spawn_with_shell("( slock && xset dpms 0 0 300 ) & xset dpms 0 0 2; xset dpms force off") end),
 
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
@@ -567,3 +567,4 @@ awful.util.spawn_with_shell("xrdb -merge $HOME/.Xresources")
 -- awful.util.spawn_with_shell("pulseaudio -D")
 -- awful.util.spawn_with_shell("autorandr --change")
 -- awful.util.spawn_with_shell("run_once.sh xautolock -time 10 -locker 'slock'")
+awful.util.spawn_with_shell("xset dpms 0 0 300")
