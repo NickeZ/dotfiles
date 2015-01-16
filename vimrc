@@ -1,4 +1,6 @@
 "Enable pathogen
+"let g:pathogen_disabled = ['vim-pandoc-after', 'vim-pantondoc']
+"let g:pathogen_disabled = ['vim-pandoc-syntax']
 call pathogen#infect()
 call pathogen#helptags()
 
@@ -18,7 +20,9 @@ if has("gui_running")
   "set guifont=Inconsolata\ Medium\ 10
   set guifont=Inconsolata\ for\ Powerline\ Medium\ 10
   set guioptions=aeR
-  colorscheme wombat
+  "colorscheme wombat
+  set background=dark
+  colorscheme base16-default
 else
   colorscheme desert
 endif
@@ -107,8 +111,13 @@ endfunction
 
 
 "Markdown
-autocmd BufNewFile,BufRead *.md set ft=pandoc
-let g:pandoc_use_conceal=0
+"autocmd BufNewFile,BufRead *.md set ft=pandoc
+let g:pandoc#syntax#conceal#use=0
+"let g:pandoc#syntax"blacklist=['
+
+"table-mode for markdown
+let g:table_mode_corner_corner='+'
+let g:table_mode_header_fillchar='='
 
 "Define indent for different sources
 autocmd FileType c   call TorvaldsStyle()
