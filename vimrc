@@ -124,6 +124,9 @@ autocmd FileType c   call TorvaldsStyle()
 autocmd FileType cpp call CosyStyleCPP()
 autocmd FileType c,cpp autocmd BufWritePre <buffer> :%s/\s\+$//e
 
+"Makefiles
+autocmd BufNewFile,BufRead CONFIG*,RULES*,RELEASE* set ft=make
+
 "JSON
 "autocmd FileType json set smartindent
 autocmd BufNewFile,BufRead *.json set ft=javascript
