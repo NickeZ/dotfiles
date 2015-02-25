@@ -27,6 +27,9 @@ else
   colorscheme desert
 endif
 
+" Gitgutter plugin
+let g:gitgutter_escape_grep = 1
+
 "Visa alltid tab-raden
 set showtabline=2
 

@@ -33,6 +33,7 @@ host ess-srv2.local
 host login.cosylab.com
     user nclaesson
     port 54321
+    ForwardAgent yes
 
 host review.simosy.se
     port 29418
@@ -72,3 +73,12 @@ host codac43buildnode
     HostName 10.5.3.123
     ForwardAgent yes
     user codac-dev
+
+host psi-nfs
+    HostName 10.5.3.103
+    ForwardAgent yes
+    user kstrnisa
+    ProxyCommand ssh nclaesson@login.cosylab.com nc %h %p
+
+host 192.168.56.101
+    ForwardAgent yes
