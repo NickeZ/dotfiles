@@ -1,14 +1,45 @@
 "Enable pathogen
 "let g:pathogen_disabled = ['vim-pandoc-after', 'vim-pantondoc']
 "let g:pathogen_disabled = ['vim-pandoc-syntax']
-call pathogen#infect()
-call pathogen#helptags()
+"call pathogen#infect()
+"call pathogen#helptags()
 
 "Icke VI kompatibel (måste vara först, ändrar inställningar)
 set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+"Plugin handler
+Plugin 'gmarik/Vundle.vim'
+
+"Colortheme
+Plugin 'chriskempson/base16-vim'
+
+"Git in the vim gutter
+Plugin 'airblade/vim-gitgutter'
+
+"Modern php syntax highlight
+Plugin 'StanAngeloff/php.vim'
+
+"Better status line
+Plugin 'powerline/powerline'
+
+"Completion
+Plugin 'Shougo/neocomplete.vim'
+
+"Markdown support
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'vim-pandoc/vim-pandoc'
+
+call vundle#end()
+
+"Aktivera filtypsidentifiering och inkludera eventuella plugins och indents
+filetype plugin indent on
 
 "Custom statusline
-set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+"set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
 set laststatus=2
 set fillchars+=stl:\ ,stlnc:\
 "set statusline="%f%< %y[%{&fileencoding}/%{&encoding}/%{&termencoding}][%{&fileformat}](%n)%m%r%w %a%=%b 0x%B  L:%l/%L, C:%-7(%c%V%) %P"
@@ -32,9 +63,6 @@ let g:gitgutter_escape_grep = 1
 
 "Visa alltid tab-raden
 set showtabline=2
-
-"Aktivera filtypsidentifiering och inkludera eventuella plugins och indents
-filetype plugin indent on
 
 "Syntax highlighting
 syntax on
