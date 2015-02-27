@@ -32,6 +32,10 @@ Plugin 'Shougo/neocomplete.vim'
 "Markdown support
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-pandoc/vim-pandoc'
+"Plugin 'godlygeek/tabular'
+"Plugin 'plasticboy/vim-markdown'
+
+Plugin 'christoomey/vim-tmux-navigator'
 
 call vundle#end()
 
@@ -86,7 +90,6 @@ set expandtab
 "Hur lång en tab ska va...
 "set tabstop=4
 set softtabstop=4 
-set expandtab
 
 "Cool completion
 set wildmenu
@@ -149,6 +152,9 @@ let g:pandoc#syntax#conceal#use=0
 "table-mode for markdown
 let g:table_mode_corner_corner='+'
 let g:table_mode_header_fillchar='='
+
+autocmd FileType sh set expandtab!
+autocmd FileType sh set tabstop=4
 
 "Define indent for different sources
 autocmd FileType c   call TorvaldsStyle()
