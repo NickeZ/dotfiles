@@ -33,3 +33,7 @@
 --regex-vhdl=/^[ \t]*function[ \t]+([a-z0-9_]+) *(\([^\)]\))?[ \t]*return [^ \t]+[ \t]+is/\1/y,function bodies/i
 --regex-vhdl=/^[ \t]*procedure[ \t]+([a-z0-9_]+) *(\([^\)]\))?[ \t]*;/\1/x,procedure declarations/i
 --regex-vhdl=/^[ \t]*procedure[ \t]+([a-z0-9_]+) *(\([^\)]\))?[ \t]+is/\1/y,procedure bodies/i
+
+--langdef=epicsDb
+--langmap=epicsDb:.template.db:.st
+--regex-epicsDb=/\$(\(|\{)([^[:space:]\)\}=]*)(\)|\})/\2/m,macro/i

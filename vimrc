@@ -1,29 +1,23 @@
-"Enable pathogen
-"let g:pathogen_disabled = ['vim-pandoc-after', 'vim-pantondoc']
-"let g:pathogen_disabled = ['vim-pandoc-syntax']
-"call pathogen#infect()
-"call pathogen#helptags()
+set nocompatible "vundle requirement
+filetype off     "vundle requirement
 
-"Icke VI kompatibel (måste vara först, ändrar inställningar)
-set nocompatible
-filetype off
-
+" Plugin management
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-"Plugin handler
+" Plugin handler
 Plugin 'gmarik/Vundle.vim'
 
-"Colortheme
+" Colortheme
 Plugin 'chriskempson/base16-vim'
 
-"Git in the vim gutter
+" Git in the vim gutter
 Plugin 'airblade/vim-gitgutter'
 
-"Modern php syntax highlight
+" Modern php syntax highlight
 Plugin 'StanAngeloff/php.vim'
 
-"Better status line
+" Better status line
 Plugin 'powerline/powerline'
 
 "Completion
@@ -36,6 +30,13 @@ Plugin 'vim-pandoc/vim-pandoc'
 "Plugin 'plasticboy/vim-markdown'
 
 Plugin 'christoomey/vim-tmux-navigator'
+
+" Better tag handling
+Plugin 'majutsushi/tagbar'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
+
+Plugin 'NickeZ/epics.vim'
 
 call vundle#end()
 
@@ -193,25 +194,13 @@ let g:netrw_altv = 1
 let g:netrw_winsize = 100
 let g:netrw_liststyle = 3
 
-"{{{Taglist configuration
-"let Tlist_Use_Right_Window = 1
-"let Tlist_Enable_Fold_Column = 0
-"let Tlist_Exit_OnlyWindow = 1
-"let Tlist_Use_SingleClick = 1
-"let Tlist_Inc_Winwidth = 0
-"let Tlist_Auto_Open = 1
-"}}}
+" tag/tagbar configuration
+set tags=./tags;$HOME
+let g:tagbar_autoclose = 1
+let g:easytags_file = '~/.vim/tmp/tags'
 
-"My aliases
-nnoremap Q gq
-
-"Använd F11 för att toggla mellan paste, no-paste
-set pastetoggle=<F10>
-" Open the Project Plugin <F2>
-nnoremap <silent> <F2> :Project<CR>
-
-" Open the TagList Plugin <F3>
-nnoremap <silent> <F3> :Tlist<CR>
+" Open tabar
+nnoremap <silent> <Leader>b :TagbarToggle<CR>
 
 " Space will toggle folds!
 nnoremap <space> za
@@ -221,8 +210,6 @@ nnoremap <space> za
 map N Nzz
 map n nzz
 
-"EPICS db
-"au BufRead,BufNewFile *.db setfiletype db
 
 " Enable backup
 set backup
