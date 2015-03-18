@@ -38,8 +38,6 @@ export LD_LIBRARY_PATH=/usr/local/lib
 
 export EDITOR=vim
 
-PATH=$PATH:/usr/NX/bin
-
 #export LC_ALL="en_US.utf8"
 export LC_TIME="sv_SE.utf8"
 export LC_NUMERIC="sv_SE.utf8"
@@ -64,4 +62,4 @@ alias evnova="WINEPREFIX=$HOME/.wine_evnova wine start \"$HOME/.wine_evnova/driv
 
 export EPICS_HOST_ARCH="linux-x86_64"
 
-export PATH=/usr/local/epics/base/bin/linux-x86_64:$PATH
+export PATH=$HOME/.local/bin:/usr/local/epics/base/bin/linux-x86_64:/usr/NX/bin:$PATH
