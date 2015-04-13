@@ -18,7 +18,6 @@ export LC_COLLATE="sv_SE.utf8"
 
 export LESS=RS
 
-PATH=$PATH:/usr/NX/bin
-PATH=/usr/local/epics/base/bin/linux-x86_64:$PATH
-
 export EPICS_HOST_ARCH="linux-x86_64"
+
+export PATH=$HOME/.local/bin:/usr/local/epics/base/bin/${EPICS_HOST_ARCH}:/usr/NX/bin:$PATH
