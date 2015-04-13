@@ -55,7 +55,10 @@ host ics-cpci2-cpu1
 host ics-cpci3-cpu1
     HostName 10.4.3.240
 
-host ics*
+host ics-cpci4-cpu1
+    HostName 10.4.3.250
+
+host ics-cpci* ics-utca*
     ForwardAgent yes
     user nclaesson
 
@@ -82,3 +85,11 @@ host psi-nfs
 
 host 192.168.56.101
     ForwardAgent yes
+
+host ics-vme1-cpu1
+    HostName 10.4.3.110
+    user root
+
+host ics-boot-01.esss.lu.se
+    ForwardAgent yes
+    user niklasclaesson

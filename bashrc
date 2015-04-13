@@ -33,35 +33,9 @@ function xil147_init () {
 }
 
 alias update='sudo apt-get update && sudo apt-get dist-upgrade -y'
-
-export LD_LIBRARY_PATH=/usr/local/lib
-
-export EDITOR=vim
-
-PATH=$PATH:/usr/NX/bin
-
-#export LC_ALL="en_US.utf8"
-export LC_TIME="sv_SE.utf8"
-export LC_NUMERIC="sv_SE.utf8"
-export LC_MONETARY="sv_SE.utf8"
-export LC_MEASUREMENT="sv_SE.utf8"
-export LC_PAPER="sv_SE.utf8"
-export LC_COLLATE="sv_SE.utf8"
-
 alias altera_init="export PATH=${PATH}:/home/niklas-sl/opt/altera/12.1/quartus/bin"
-
-#alias make="/usr/bin/make -j 3"
-
 alias lthtunnel="ssh -D 8888 et07nc7@login.student.lth.se"
-
 alias bc="bc -l"
 alias grep="grep --line-number --color=auto"
-
 alias indentCosy="indent -linux -i2 -nut"
-export LESS=RS
-
 alias evnova="WINEPREFIX=$HOME/.wine_evnova wine start \"$HOME/.wine_evnova/drive_c/users/niklas/Start Menu/Programs/EV Nova/EV Nova.lnk\""
-
-export EPICS_HOST_ARCH="linux-x86_64"
-
-export PATH=/usr/local/epics/base/bin/linux-x86_64:$PATH
