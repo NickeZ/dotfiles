@@ -38,6 +38,9 @@ Plugin 'xolox/vim-easytags'
 
 Plugin 'NickeZ/epics.vim'
 
+"Run external syntax checkers
+Plugin 'scrooloose/syntastic.git'
+
 call vundle#end()
 
 "Aktivera filtypsidentifiering och inkludera eventuella plugins och indents
@@ -50,6 +53,16 @@ set fillchars+=stl:\ ,stlnc:\
 "set statusline="%f%< %y[%{&fileencoding}/%{&encoding}/%{&termencoding}][%{&fileformat}](%n)%m%r%w %a%=%b 0x%B  L:%l/%L, C:%-7(%c%V%) %P"
 "höjd på kommandoraden
 "set cmdheight=2
+
+"Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 "GVim
 if has("gui_running")
@@ -209,6 +222,8 @@ nnoremap <space> za
 " search will center on the line it's found in.
 map N Nzz
 map n nzz
+
+map q: :q
 
 
 " Enable backup

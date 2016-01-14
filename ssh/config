@@ -43,24 +43,9 @@ host raon
     user raon-dev
     ForwardAgent yes
 
-host ics-utca1-cpu1
-    HostName 10.4.3.210
-
-host ics-cpci1-cpu1
-    HostName 10.4.3.220
-
-host ics-cpci2-cpu1
-    HostName 10.4.3.230
-
-host ics-cpci3-cpu1
-    HostName 10.4.3.240
-
-host ics-cpci4-cpu1
-    HostName 10.4.3.250
-
-host ics-cpci* ics-utca*
+host ics-cpci* icsb-*
     ForwardAgent yes
-    user nclaesson
+    user niklasclaesson
 
 host raonlaptop
     HostName 10.5.2.67
@@ -88,6 +73,12 @@ host 192.168.56.101
 
 host ics-vme1-cpu1
     HostName 10.4.3.110
+    StrictHostKeyChecking no
+    user root
+
+host ics-vme2-cpu2
+    HostName 10.4.3.111
+    StrictHostKeyChecking no
     user root
 
 host ics-boot-01.esss.lu.se

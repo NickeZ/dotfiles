@@ -242,6 +242,27 @@ separator.text = " :: "
 -- Volume indicator
 -- Load the widget.
 
+-- Keyboard map indicator and changer
+kbdcfg = {}
+kbdcfg.cmd = "setxkbmap"
+kbdcfg.cmdmodmap = "xmodmap $HOME/.Xmodmap"
+kbdcfg.layout = { "se", "us" }
+kbdcfg.current = 1  -- us is our default layout
+kbdcfg.widget = widget({ type = "textbox", align = "right" })
+kbdcfg.widget.text = " " .. kbdcfg.layout[kbdcfg.current] .. " "
+kbdcfg.switch = function ()
+   kbdcfg.current = kbdcfg.current % #(kbdcfg.layout) + 1
+   local t = " " .. kbdcfg.layout[kbdcfg.current] .. " "
+   kbdcfg.widget.text = t
+   os.execute( kbdcfg.cmd .. t )
+   os.execute( kbdcfg.cmdmodmap )
+end
+
+-- Mouse bindings keyboard layout changer
+kbdcfg.widget:buttons(awful.util.table.join(
+    awful.button({ }, 1, function () kbdcfg.switch() end)
+))
+
 -- Example: Add to wibox. Here to the right. Do it the way you like it.
 --right_layout:add(APW)
 
@@ -282,6 +303,8 @@ for s = 1, screen.count() do
             separator,
             batwi_t,
             batw2_t,
+            separator,
+            kbdcfg.widget,
             separator,
             memwi_t,
             memwi_b.widget,
@@ -407,7 +430,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    --awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    -- Change Prompt to Change keyboard layout.
+    awful.key({ modkey },            "r",     function () kbdcfg.switch() end),
 
     awful.key({ modkey }, "x",
               function ()
@@ -557,7 +582,7 @@ client.add_signal("unfocus", function(c) c.border_color = beautiful.border_norma
 -- }}}
 
 -- Autostart
-awful.util.spawn_with_shell("xrdb -merge $HOME/.Xresources")
+-- awful.util.spawn_with_shell("xrdb -merge $HOME/.Xresources")
 -- awful.util.spawn_with_shell("run_once.sh /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1")
 -- awful.util.spawn_with_shell("xfce4-power-manager")
 -- awful.util.spawn_with_shell("eval `run_once.sh ssh-agent`")

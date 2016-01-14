@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Exec=/usr/lib/unity-settings-daemon/unity-fallback-mount-helper
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Volume Manager
+Name=Volume Manager
+Comment[en_US]=Unity volume manager
+Comment=Unity volume manager
