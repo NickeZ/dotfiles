@@ -1,3 +1,6 @@
+" Fix tmux -> fish -> vim issues
+set shell=/bin/sh
+
 set nocompatible "vundle requirement
 filetype off     "vundle requirement
 
@@ -91,6 +94,12 @@ set cursorline
 
 "mus
 set mouse=a
+" Fix wide screenissue
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 
 "Antal kommando som sparas
 set history=50
@@ -148,6 +157,15 @@ function TorvaldsStyle()
         setlocal textwidth=80
 endfunction
 
+"RegularStyle
+"4 spaces indent
+function RegularStyle()
+        setlocal tabstop=4
+        setlocal softtabstop=4
+        setlocal shiftwidth=4
+        setlocal textwidth=120
+endfunction
+
 "CosyStyleCPP
 "2 spaces indent
 function CosyStyleCPP()
@@ -171,7 +189,7 @@ autocmd FileType sh set expandtab!
 autocmd FileType sh set tabstop=4
 
 "Define indent for different sources
-autocmd FileType c   call TorvaldsStyle()
+autocmd FileType c   call RegularStyle()
 autocmd FileType cpp call CosyStyleCPP()
 autocmd FileType c,cpp autocmd BufWritePre <buffer> :%s/\s\+$//e
 

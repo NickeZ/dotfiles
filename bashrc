@@ -36,6 +36,9 @@ alias update='sudo apt-get update && sudo apt-get dist-upgrade -y'
 alias altera_init="export PATH=${PATH}:/home/niklas-sl/opt/altera/12.1/quartus/bin"
 alias lthtunnel="ssh -D 8888 et07nc7@login.student.lth.se"
 alias bc="bc -l"
-alias grep="grep --line-number --color=auto"
+alias grep='grep --exclude-dir=.svn --line-number --color=auto'
 alias indentCosy="indent -linux -i2 -nut"
 alias evnova="WINEPREFIX=$HOME/.wine_evnova wine start \"$HOME/.wine_evnova/drive_c/users/niklas/Start Menu/Programs/EV Nova/EV Nova.lnk\""
+
+SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
+
