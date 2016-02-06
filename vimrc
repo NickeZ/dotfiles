@@ -1,3 +1,6 @@
+" Fix tmux -> fish -> vim issues
+set shell=/bin/sh
+
 set nocompatible "vundle requirement
 filetype off     "vundle requirement
 
@@ -41,6 +44,9 @@ Plugin 'NickeZ/epics.vim'
 " Rust support
 Plugin 'rust-lang/rust.vim'
 
+"Run external syntax checkers
+Plugin 'scrooloose/syntastic.git'
+
 call vundle#end()
 
 "Aktivera filtypsidentifiering och inkludera eventuella plugins och indents
@@ -53,6 +59,16 @@ set fillchars+=stl:\ ,stlnc:\
 "set statusline="%f%< %y[%{&fileencoding}/%{&encoding}/%{&termencoding}][%{&fileformat}](%n)%m%r%w %a%=%b 0x%B  L:%l/%L, C:%-7(%c%V%) %P"
 "höjd på kommandoraden
 "set cmdheight=2
+
+"Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 "GVim
 if has("gui_running")
@@ -82,6 +98,12 @@ set cursorline
 
 "mus
 set mouse=a
+" Fix wide screenissue
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 
 "Antal kommando som sparas
 set history=50
@@ -139,6 +161,15 @@ function TorvaldsStyle()
         setlocal textwidth=80
 endfunction
 
+"RegularStyle
+"4 spaces indent
+function RegularStyle()
+        setlocal tabstop=4
+        setlocal softtabstop=4
+        setlocal shiftwidth=4
+        setlocal textwidth=120
+endfunction
+
 "CosyStyleCPP
 "2 spaces indent
 function CosyStyleCPP()
@@ -162,7 +193,7 @@ autocmd FileType sh set expandtab!
 autocmd FileType sh set tabstop=4
 
 "Define indent for different sources
-autocmd FileType c   call TorvaldsStyle()
+autocmd FileType c   call RegularStyle()
 autocmd FileType cpp call CosyStyleCPP()
 autocmd FileType c,cpp autocmd BufWritePre <buffer> :%s/\s\+$//e
 
@@ -213,6 +244,8 @@ nnoremap <space> za
 " search will center on the line it's found in.
 map N Nzz
 map n nzz
+
+map q: :q
 
 
 " Enable backup
