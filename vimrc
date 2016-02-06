@@ -38,6 +38,9 @@ Plugin 'xolox/vim-easytags'
 
 Plugin 'NickeZ/epics.vim'
 
+" Rust support
+Plugin 'rust-lang/rust.vim'
+
 call vundle#end()
 
 "Aktivera filtypsidentifiering och inkludera eventuella plugins och indents
@@ -60,7 +63,8 @@ if has("gui_running")
   set background=dark
   colorscheme base16-default
 else
-  colorscheme desert
+  " Set colorscheme of terminal instead of here...
+  "colorscheme base16-default
 endif
 
 " Gitgutter plugin
