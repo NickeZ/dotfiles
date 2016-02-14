@@ -23,3 +23,6 @@ end
 function fish_right_prompt -d "Write out the right prompt"
   date "+[%H:%M] %m/%d/%y"
 end
+
+# Base16 Shell
+eval sh $HOME/git/dotfiles/base16-shell/base16-default.dark.sh

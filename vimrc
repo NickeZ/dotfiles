@@ -79,8 +79,9 @@ if has("gui_running")
   set background=dark
   colorscheme base16-default
 else
-  " Set colorscheme of terminal instead of here...
-  "colorscheme base16-default
+  set background=dark
+  let base16colorspace=256  " Access colors present in 256 colorspace
+  colorscheme base16-default
 endif
 
 " Gitgutter plugin

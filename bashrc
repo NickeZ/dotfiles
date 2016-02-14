@@ -34,7 +34,6 @@ function xil147_init () {
 
 alias update='sudo apt-get update && sudo apt-get dist-upgrade -y'
 alias altera_init="export PATH=${PATH}:/home/niklas-sl/opt/altera/12.1/quartus/bin"
-alias lthtunnel="ssh -D 8888 et07nc7@login.student.lth.se"
 alias bc="bc -l"
 alias grep='grep --exclude-dir=.svn --line-number --color=auto'
 alias indentCosy="indent -linux -i2 -nut"
@@ -42,3 +41,6 @@ alias evnova="WINEPREFIX=$HOME/.wine_evnova wine start \"$HOME/.wine_evnova/driv
 
 SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
 
+# Base16 Shell
+BASE16_SHELL="$HOME/git/dotfiles/base16-shell/base16-default.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
