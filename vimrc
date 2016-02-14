@@ -80,8 +80,8 @@ if has("gui_running")
   colorscheme base16-default
 else
   set background=dark
-  let base16colorspace=256  " Access colors present in 256 colorspace
-  colorscheme base16-default
+  "let base16colorspace=256  " Access colors present in 256 colorspace
+  colorscheme base16-solarized
 endif
 
 " Gitgutter plugin

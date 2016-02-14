@@ -25,4 +25,4 @@ function fish_right_prompt -d "Write out the right prompt"
 end
 
 # Base16 Shell
-eval sh $HOME/git/dotfiles/base16-shell/base16-default.dark.sh
+eval sh $HOME/git/dotfiles/vendor/base16-shell/base16-solarized.dark.sh

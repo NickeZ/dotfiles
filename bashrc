@@ -44,5 +44,5 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 fi
 
 # Base16 Shell
-BASE16_SHELL="$HOME/git/dotfiles/base16-shell/base16-default.dark.sh"
+BASE16_SHELL="$HOME/git/dotfiles/vendor/base16-shell/base16-solarized.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
