@@ -39,7 +39,9 @@ alias grep='grep --exclude-dir=.svn --line-number --color=auto'
 alias indentCosy="indent -linux -i2 -nut"
 alias evnova="WINEPREFIX=$HOME/.wine_evnova wine start \"$HOME/.wine_evnova/drive_c/users/niklas/Start Menu/Programs/EV Nova/EV Nova.lnk\""
 
-SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+    SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
+fi
 
 # Base16 Shell
 BASE16_SHELL="$HOME/git/dotfiles/base16-shell/base16-default.dark.sh"
