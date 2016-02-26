@@ -43,6 +43,10 @@ if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
     SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
 fi
 
+if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
+	export TERM=xterm-256color
+fi
+
 # Base16 Shell
 BASE16_SHELL="$HOME/git/dotfiles/vendor/base16-shell/base16-solarized.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
