@@ -40,7 +40,7 @@ alias indentCosy="indent -linux -i2 -nut"
 alias evnova="WINEPREFIX=$HOME/.wine_evnova wine start \"$HOME/.wine_evnova/drive_c/users/niklas/Start Menu/Programs/EV Nova/EV Nova.lnk\""
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
-    SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock
+	SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock.$(hostname)
 fi
 
 if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
