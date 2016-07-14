@@ -73,11 +73,11 @@ let g:syntastic_check_on_wq = 0
 "GVim
 if has("gui_running")
   "set guifont=Inconsolata\ Medium\ 10
-  set guifont=Inconsolata\ for\ Powerline\ Medium\ 10
+  set guifont=Hack\ 10
   set guioptions=aeR
   "colorscheme wombat
-  set background=dark
-  colorscheme base16-default
+  set background=light
+  colorscheme base16-solarized
 else
   set background=dark
   let base16colorspace=256  " Access colors present in 256 colorspace
