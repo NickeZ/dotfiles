@@ -4,7 +4,7 @@ host *
     GSSAPIAuthentication no
 
 host bjartmarhylta
-    HostName 213.185.18.6
+    HostName 77.110.7.87
     ForwardAgent yes
 
 host hacke
