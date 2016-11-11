@@ -1,0 +1,23 @@
+# /usr/share/xsessions/gnome-i3.desktop
+
+[Desktop Entry]
+Name=GNOME with i3
+Comment=A GNOME fallback mode session using i3 as the window manager.
+Exec=gnome-session --session=gnome-i3
+TryExec=gnome-session
+Icon=
+Type=Application
+DesktopNames=GNOME-Flashback;Unity;
+X-Ubuntu-Gettext-Domain=gnome-flashback
+
+
+# /usr/share/gnome-session/sessions/gnome-i3.session
+
+[GNOME Session]
+Name=gnome-i3
+RequiredComponents=gnome-panel;unity-settings-daemon;i3;gnome-flashback-services;
+
+
+# In /usr/share/applications/i3.desktop comment out:
+
+#X-GNOME-Autostart-Notify=false
