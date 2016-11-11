@@ -84,3 +84,7 @@ host ics-vme2-cpu2
 host ics-boot-01.esss.lu.se
     ForwardAgent yes
     user niklasclaesson
+
+host ics-build01.ics.esss.lu.se
+    ForwardAgent yes
+    user niklasclaesson
