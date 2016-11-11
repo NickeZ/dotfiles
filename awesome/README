@@ -1,0 +1,11 @@
+# Fix panels in control center
+
+```
+cd /usr/share/applications
+sudo sed -i 's/\(OnlyShowIn.*GNOME.*\)/\1Awesome;/' *.desktop
+#sudo sed -i 's/\(OnlyShowIn.*GNOME.*\)/\1Awesome;/' *panel.desktop
+
+cd /etc/xdg/autostart
+sudo sed -i 's/\(OnlyShowIn.*Unity.*\)/\1Awesome;/' *.desktop
+sudo sed -i 's/Awesome;Awesome/Awesome/' *.desktop
+```
