@@ -17,6 +17,9 @@ Plugin 'chriskempson/base16-vim'
 " Git in the vim gutter
 Plugin 'airblade/vim-gitgutter'
 
+" Open from history with :Gedit
+Plugin 'tpope/vim-fugitive.git'
+
 " Modern php syntax highlight
 Plugin 'StanAngeloff/php.vim'
 
@@ -77,11 +80,11 @@ if has("gui_running")
   set guioptions=aeR
   "colorscheme wombat
   set background=light
-  colorscheme base16-solarized
+  colorscheme base16-solarized-light
 else
-  set background=dark
+  "set background=dark
   let base16colorspace=256  " Access colors present in 256 colorspace
-  colorscheme base16-solarized
+  colorscheme base16-solarized-dark
 endif
 
 " Gitgutter plugin
