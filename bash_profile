@@ -51,3 +51,5 @@ export EDITOR=vim
 
 #export EPICS_ENV_PATH=/opt/epics/modules/environment/niklasclaesson/3.14.12.5/bin/centos7-x86_64
 #export PATH=$EPICS_ENV_PATH:$PATH
+
+[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
