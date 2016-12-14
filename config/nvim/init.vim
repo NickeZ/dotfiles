@@ -10,7 +10,7 @@ Plug 'NickeZ/epics.vim'
 
 call plug#end()
 
-"Enable Neomake to run asynchronously on save
+" Enable Neomake to run asynchronously on save
 autocmd! BufWritePost * Neomake
 
 if has("gui_running")
@@ -26,7 +26,13 @@ else
   colorscheme base16-solarized-dark
 endif
 
-"Define indentation different per source
+" Use spaces instead of tabs
+set expandtab
+" Ruler and line numbers
+set ruler
+set number
+
+" Define indentation different per source
 autocmd FileType sh set expandtab!
 autocmd FileType sh set tabstop=4
 
@@ -34,7 +40,14 @@ autocmd FileType sh set tabstop=4
 " search will center on the line it's found in.
 map N Nzz
 map n nzz
-"
-"Display trailing characters
+
+" Display trailing characters
 set list
 set listchars=nbsp:¬,tab:»·,trail:·
+
+" Go to the last cursor location when a file is opened, unless this is a
+" git commit (in which case it's annoying)
+au BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "gitcommit" |
+    \ execute("normal `\"") |
+  \ endif
