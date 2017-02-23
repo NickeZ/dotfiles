@@ -48,7 +48,7 @@ bindsym $mod+d exec dmenu_run
 bindsym $mod+j focus left
 bindsym $mod+k focus down
 bindsym $mod+l focus up
-bindsym $mod+odiaeresis focus right
+bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -60,7 +60,7 @@ bindsym $mod+Right focus right
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
-bindsym $mod+Shift+odiaeresis move right
+bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -123,16 +123,16 @@ bindsym $mod+9 workspace $tag9
 bindsym $mod+0 workspace $tag10
 
 # bind workspace to monitor
-workspace $tag1 output eDP1
-workspace $tag2 output eDP1
-workspace $tag3 output eDP1
-workspace $tag4 output DP1
-workspace $tag5 output DP1
-workspace $tag6 output DP1
-workspace $tag7 output DP2
-workspace $tag8 output DP2
-workspace $tag9 output DP2
-workspace $tag10 output eDP1
+workspace $tag1 output eDP-1
+workspace $tag2 output eDP-1
+workspace $tag3 output eDP-1
+workspace $tag4 output DP-1
+workspace $tag5 output DP-1
+workspace $tag6 output DP-1
+workspace $tag7 output DP-2
+workspace $tag8 output DP-2
+workspace $tag9 output DP-2
+workspace $tag10 output eDP-1
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $tag1
@@ -164,7 +164,7 @@ mode "resize" {
         bindsym j resize shrink width 10 px or 10 ppt
         bindsym k resize grow height 10 px or 10 ppt
         bindsym l resize shrink height 10 px or 10 ppt
-        bindsym odiaeresis resize grow width 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -207,5 +207,5 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 10
 
 
 # Tell gnome session that we are started..
-#exec --no-startup-id echo "$0: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager"
-#exec --no-startup-id dbus-send --session --print-reply=literal --dest=org.gnome.SessionManager "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient "string:i3" "string:$DESKTOP_AUTOSTART_ID"
+exec --no-startup-id echo "$0: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager"
+exec --no-startup-id dbus-send --session --print-reply=literal --dest=org.gnome.SessionManager "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient "string:i3" "string:$DESKTOP_AUTOSTART_ID"
