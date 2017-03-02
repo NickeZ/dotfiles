@@ -11,24 +11,24 @@ HISTFILESIZE=10000
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u \[\033[01;34m\]@ \[\033[01;35m\]\h\[\033[00m\] : \[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n\$ '
 unset color_prompt force_color_prompt
 
-alias xil10_init=""
-function xil10_init () {
+#alias xil10_init=""
+xil10_init () {
 . /opt/Xilinx/10.1/ISE/settings64.sh
 . /opt/Xilinx/10.1/EDK/settings64.sh
 export LD_PRELOAD=/opt/Xilinx/lib/libusb-driver.so
 }
 
-function xil13_init () {
+xil13_init () {
 . /opt/Xilinx/13.4/ISE_DS/settings64.sh
 }
 
-function xil14_init () {
+xil14_init () {
 local OPT=/home/niklas-sl/opt
 XIL_CSE_PLUGIN_DIR=$HOME/.cse
 . $OPT/Xilinx/14.4/ISE_DS/settings64.sh
 }
 
-function xil147_init () {
+xil147_init () {
 . /home/niklas/opt/Xilinx/14.7/ISE_DS/settings64.sh
 }
 
@@ -50,3 +50,7 @@ fi
 # Base16 Shell
 BASE16_SHELL="$HOME/git/dotfiles/vendor/base16-shell/scripts/base16-solarized-dark.sh"
 [[ "$-" == *i* ]] && [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+alias fixssh="ln --symbolic --no-dereference --force $(find /tmp -path '/tmp/ssh-*/agent.*' -user $USER -type s 2> /dev/null | head -1) $HOME/.ssh/ssh_auth_sock.$(hostname)"
+
+CARGO_INCREMENTAL=1
