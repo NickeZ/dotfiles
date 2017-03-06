@@ -1,0 +1,8 @@
+#!/bin/sh
+if [ -z "${NEOMAKE_CARGO}" ] ; then
+	echo "rustc regular" >&2
+	"$HOME/.cargo/bin/rustc" "${@}"
+else
+	echo "rustc without dead_code" >&2
+	"$HOME/.cargo/bin/rustc" -A dead_code -A unused_imports "${@}"
+fi
