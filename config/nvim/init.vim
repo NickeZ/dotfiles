@@ -12,19 +12,26 @@ call plug#end()
 
 " Enable Neomake to run asynchronously on open and save
 autocmd! BufWinEnter,BufWritePost * Neomake
-autocmd! BufWritePost, *.rs Neomake!
+autocmd! BufWritePost, *.rs Neomake! cargo
+
+" Neomake configuration
+" Enable messages
+"let g:neomake_verbose = 3
 " Open the list of errors without moving the cursor
 let g:neomake_open_list = 2
+
 " Default to GCC instead of clang
 let g:neomake_c_enabled_makers = ['gcc']
 let g:neomake_cpp_enabled_makers = ['gcc']
+
 " Enable cargo for rust files
 let g:neomake_rust_enabled_makers = []
 let g:neomake_enabled_makers = ['cargo']
+"let g:neomake_rust_enabled_makers = ['cargo']
+
 " Sample configuration to put in .local.vimrc
 "let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall', '-Wextra', '-I/opt/epics/bases/base-3.14.12.5/include', '-I/opt/epics/bases/base-3.14.12.5/include/os/Linux', '-I/opt/epics/modules/environment/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/asyn/4.27.0/3.14.12.5/include', '-I/opt/epics/modules/ifcdaqdrv/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/nds3/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/devlib2/2.6.0/3.14.12.5/include', '-I/opt/epics/modules/ifcdaqdrv/niklasclaesson/3.14.12.5/include']
 "let g:neomake_cpp_gcc_args = ['-fsyntax-only', '-Wall', '-Wextra', '-std=c++0x', '-I/opt/epics/bases/base-3.14.12.5/include', '-I/opt/epics/bases/base-3.14.12.5/include/os/Linux', '-I/opt/epics/modules/environment/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/asyn/4.27.0/3.14.12.5/include', '-I/opt/epics/modules/ifcdaqdrv/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/nds3/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/devlib2/2.6.0/3.14.12.5/include', '-I/opt/epics/modules/ifcdaqdrv/niklasclaesson/3.14.12.5/include']
-"let g:neomake_enabled_makers = ['gcc']
 
 if has("gui_running")
   "set guifont=Inconsolata\ Medium\ 10
