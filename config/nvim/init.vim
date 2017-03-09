@@ -2,7 +2,7 @@ call plug#begin()
 
 Plug 'rust-lang/rust.vim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'chriskempson/base16-vim'
+Plug 'NickeZ/base16-vim', { 'branch': 'improve-highlight-readability' }
 Plug 'neomake/neomake'
 Plug 'airblade/vim-gitgutter'
 
