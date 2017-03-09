@@ -53,4 +53,4 @@ BASE16_SHELL="$HOME/git/dotfiles/vendor/base16-shell/scripts/base16-solarized-da
 
 alias fixssh="ln --symbolic --no-dereference --force $(find /tmp -path '/tmp/ssh-*/agent.*' -user $USER -type s 2> /dev/null | head -1) $HOME/.ssh/ssh_auth_sock.$(hostname)"
 
-export CARGO_INCREMENTAL=1
+#export CARGO_INCREMENTAL=1

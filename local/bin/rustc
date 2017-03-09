@@ -1,8 +1,15 @@
 #!/bin/sh
+# This wrapper disables some pedantic warnings without telling Cargo.. This is
+# useful if you want to use `cargo build` from your editor with fewer warnings
+# and then from your terminal with all warnings without recompiling all
+# dependencies.
+#
+# Usage:
+#   Put this file in ~/.local/bin and export RUSTC=~/.local/bin/rustc in
+#   .bashrc/.zshrc
+
 if [ -z "${NEOMAKE_CARGO}" ] ; then
-	echo "rustc regular" >&2
 	"$HOME/.cargo/bin/rustc" "${@}"
 else
-	echo "rustc without dead_code" >&2
-	"$HOME/.cargo/bin/rustc" -A dead_code -A unused_imports "${@}"
+	"$HOME/.cargo/bin/rustc" -A dead_code -A unused_imports -A unused_variables "${@}"
 fi

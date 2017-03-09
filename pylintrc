@@ -2,6 +2,7 @@
 
 output-format=colorized
 reports=no
+disable=unused-variable,unused-argument,fixme
 
 [FORMAT]
 

@@ -20,9 +20,9 @@ function fish_prompt  -d "Write out the prompt"
   printf '$ '
 end
 
-function fish_right_prompt -d "Write out the right prompt"
-  date "+[%H:%M] %m/%d/%y"
-end
+#function fish_right_prompt -d "Write out the right prompt"
+#  date "+[%H:%M] %m/%d/%y"
+#end
 
 # Base16 Shell
 eval sh $HOME/git/dotfiles/vendor/base16-shell/scripts/base16-solarized-dark.sh

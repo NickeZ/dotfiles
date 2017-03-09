@@ -19,6 +19,7 @@ autocmd! BufWritePost, *.rs Neomake! cargo
 "let g:neomake_verbose = 3
 " Open the list of errors without moving the cursor
 let g:neomake_open_list = 2
+let $NEOMAKE_CARGO = 1
 
 " Default to GCC instead of clang
 let g:neomake_c_enabled_makers = ['gcc']
@@ -27,7 +28,7 @@ let g:neomake_cpp_enabled_makers = ['gcc']
 " Enable cargo for rust files
 let g:neomake_rust_enabled_makers = []
 let g:neomake_enabled_makers = ['cargo']
-"let g:neomake_rust_enabled_makers = ['cargo']
+let g:neomake_cargo_args = [ 'check' ]
 
 " Sample configuration to put in .local.vimrc
 "let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall', '-Wextra', '-I/opt/epics/bases/base-3.14.12.5/include', '-I/opt/epics/bases/base-3.14.12.5/include/os/Linux', '-I/opt/epics/modules/environment/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/asyn/4.27.0/3.14.12.5/include', '-I/opt/epics/modules/ifcdaqdrv/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/nds3/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/devlib2/2.6.0/3.14.12.5/include', '-I/opt/epics/modules/ifcdaqdrv/niklasclaesson/3.14.12.5/include']
