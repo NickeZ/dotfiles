@@ -4,7 +4,7 @@
 GIT_PS1_SHOWUPSTREAM="auto"
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
-source $HOME/git/dotfiles/git-prompt.sh
+. $HOME/git/dotfiles/git-prompt.sh
 
 ## Bash config
 HISTSIZE=5000
@@ -13,7 +13,6 @@ HISTFILESIZE=10000
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u \[\033[01;34m\]@ \[\033[01;35m\]\h\[\033[00m\] : \[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n\$ '
 unset color_prompt force_color_prompt
 
-#alias xil10_init=""
 xil10_init () {
 . /opt/Xilinx/10.1/ISE/settings64.sh
 . /opt/Xilinx/10.1/EDK/settings64.sh
@@ -51,9 +50,12 @@ fi
 
 # Base16 Shell
 BASE16_SHELL="$HOME/git/dotfiles/vendor/base16-shell/scripts/base16-solarized-dark.sh"
-[[ "$-" == *i* ]] && [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+[[ "$-" == *i* ]] && [[ -s $BASE16_SHELL ]] && . "$BASE16_SHELL"
 
-alias fixssh="ln --symbolic --no-dereference --force $(find /tmp -path '/tmp/ssh-*/agent.*' -user $USER -type s 2> /dev/null | head -1) $HOME/.ssh/ssh_auth_sock.$(hostname)"
+alias fixssh="ln --symbolic --no-dereference --force $(find /tmp -path '/tmp/ssh-*/agent.*' -user "$USER" -type s 2> /dev/null | head -1) $HOME/.ssh/ssh_auth_sock.$(hostname)"
 
 #export CARGO_INCREMENTAL=1
-[[ -f ~/.local/bin/rustc ]] && export RUSTC=~/.local/bin/rustc
+# breaks projects with their own rustc (i.e. servo)
+#[[ -f ~/.local/bin/rustc ]] && export RUSTC=~/.local/bin/rustc
+
+alias docker-rmexited="sudo sh -c 'docker ps -a | /bin/grep Exit | cut -d \" \" -f 1 | xargs docker rm'"
