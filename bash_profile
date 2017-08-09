@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
@@ -18,21 +19,24 @@ if [ -d "/usr/local/epics/base/bin/linux-x86_64" ] ; then
 fi
 
 # Set path to rustc/cargo
-[[ -f "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
-	PATH="$HOME/bin:$PATH"
+	case "$PATH" in
+		*:"$HOME/bin":*)
+			;;
+		*)
+			PATH="$HOME/bin:$PATH"
+	esac
 fi
 if [ -d "$HOME/.local/bin" ] ; then
-	PATH="$HOME/.local/bin:$PATH"
-fi
-
-# Allow locally installed libraries to be loaded.
-if [ -z "$LD_LIBRARY_PATH" ] ; then
-	export LD_LIBRARY_PATH=/usr/local/lib
-else 
-	export LD_LIBRARY_PATH+=:/usr/local/lib
+	case "$PATH" in
+		*:"$HOME/.local/bin":*)
+			;;
+		*)
+			PATH="$HOME/.local/bin:$PATH"
+	esac
 fi
 
 # Set locale stuff
@@ -51,6 +55,3 @@ export LESS=RS
 export EDITOR=vim
 
 # vim: set ft=.bashrc
-
-#export EPICS_ENV_PATH=/opt/epics/modules/environment/niklasclaesson/3.14.12.5/bin/centos7-x86_64
-#export PATH=$EPICS_ENV_PATH:$PATH
