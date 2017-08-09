@@ -19,6 +19,9 @@ slask.php
 *.ps
 *.a
 *.so
+*.gch
 *.autosave
 **/CVS
 tags
+.local.vimrc
+.nvimlog
