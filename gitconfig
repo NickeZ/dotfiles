@@ -30,11 +30,9 @@
     remote = origin
     merge = refs/heads/develop
 [alias]
-    co = checkout
-    br = branch
-    ci = commit
     st = status
     l = log --graph --pretty=format:'%C(yellow)%h%Creset%C(blue)%d%Creset %C(white bold)%s%Creset %C(white dim)(by %an %ar)%Creset'
     ll = !git l --all
+    pr = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
 [push]
     default = current
