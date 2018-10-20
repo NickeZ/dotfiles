@@ -1,0 +1,4 @@
+#!/bin/bash
+xset dpms 30
+slock
+xset dpms 600
