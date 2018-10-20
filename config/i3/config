@@ -7,14 +7,10 @@
 
 # i3 config file (v4)
 #
-# Please see http://i3wm.org/docs/userguide.html for a complete reference!
-#
-# This config file uses keycodes (bindsym) and was written for the QWERTY
-# layout.
-#
-# To get a config file with the same key positions, but for your current
-# layout, use the i3-config-wizard
-#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+
+# Use alt instead of super key
+set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -32,24 +28,11 @@ font pango:hack 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
-# use these keys for focus, movement, and resize directions when reaching for
-# the arrows is not convenient
-set $left h
-set $down j
-set $up k
-# Might be semicolon or odiaeresis
-#set $right odiaeresis
-#set $right semicolon
-set $right l
-
-# Use alt instead of super key
-set $mod Mod1
-
-# use Mouse+Mod1 to drag floating windows to their wanted position
+# Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -61,6 +44,16 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $left h
+set $down j
+set $up k
+# Might be semicolon or odiaeresis
+#set $right odiaeresis
+#set $right semicolon
+set $right l
 # change focus
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
@@ -210,11 +203,9 @@ bar {
         tray_output primary
 }
 
-bindsym --release $mod+Shift+s exec "slock-with-dpms"
-
-#exec --no-startup-id "setxkbmap -model pc105 -layout us,se -variant euro, -option grp:alt_shift_toggle"
-#setxkbmap -layout se,us -variant ,intl -option -option grp:alt_space_toggle
-#exec --no-startup-id "nm-applet"
+# systray applets
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
 
 # Media keys
 # Pulse Audio controls
@@ -251,5 +242,15 @@ exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
 exec --no-startup-id xinput --set-prop "Logitech M705" 'Coordinate Transformation Matrix' 0.5 0 0 0 0.5 0 0 0 1
 exec --no-startup-id xinput --set-prop "Logitech M705" 'libinput Accel Speed' -0.5
 
+# Configure touchpad
+exec --no-startup-id /home/niklas/.config/i3/touchpad-init
+
 # Set X Screen DPI to match laptop screen DPI
 exec --no-startup-id xrandr --dpi eDP-1
+
+# Enable/disable monitor
+bindsym $mod+m         exec --no-startup-id xrandr --output DP-1 --off
+bindsym $mod+shift+m   exec --no-startup-id xrandr --output eDP-1 --auto --primary --output DP-1 --auto --right-of eDP-1
+
+# Screenlocker
+bindsym --release $mod+Shift+s exec "slock-with-dpms"

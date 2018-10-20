@@ -5,7 +5,7 @@ GIT_PS1_SHOWUPSTREAM="auto"
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWCOLORHINTS=1
-. $HOME/git/dotfiles/git-prompt.sh
+. $HOME/.config/git/git-prompt.sh
 
 ## Bash config
 HISTSIZE=5000

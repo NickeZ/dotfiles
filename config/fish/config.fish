@@ -1,7 +1,7 @@
 # Fish config
-set -gx ANDROID_SDK /home/niklas/android/android-sdk-linux
-set -gx ANDROID_NDK /home/niklas/android/android-ndk-r10e
-set -gx PATH $PATH $ANDROID_SDK/tools $ANDROID_SDK/platform-tools $ANDROID_NDK
+# set -gx ANDROID_SDK /home/niklas/android/android-sdk-linux
+# set -gx ANDROID_NDK /home/niklas/android/android-ndk-r10e
+# set -gx PATH $PATH $ANDROID_SDK/tools $ANDROID_SDK/platform-tools $ANDROID_NDK
 
 set fish_greeting
 
