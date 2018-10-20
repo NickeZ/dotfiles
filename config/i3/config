@@ -18,7 +18,8 @@
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:hack 10
+font pango:hack 8
+#font pango:IBM Plex Mono 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -33,11 +34,13 @@ font pango:hack 10
 
 # use these keys for focus, movement, and resize directions when reaching for
 # the arrows is not convenient
-set $up l
-set $down k
-set $left j
+set $left h
+set $down j
+set $up k
 # Might be semicolon or odiaeresis
-set $right odiaeresis
+#set $right odiaeresis
+#set $right semicolon
+set $right l
 
 # Use alt instead of super key
 set $mod Mod1
@@ -83,7 +86,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+s split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -92,21 +95,21 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+bindsym $mod+q layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+bindsym Control+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+bindsym Control+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+c focus child
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
@@ -150,9 +153,9 @@ workspace $tag3 output eDP-1
 workspace $tag4 output DP-1
 workspace $tag5 output DP-1
 workspace $tag6 output DP-1
-workspace $tag7 output DP-2
-workspace $tag8 output DP-2
-workspace $tag9 output DP-2
+workspace $tag7 output DP-1
+workspace $tag8 output DP-1
+workspace $tag9 output DP-1
 workspace $tag10 output eDP-1
 
 # move focused container to workspace
@@ -207,10 +210,11 @@ bar {
         tray_output primary
 }
 
-bindsym $mod+Shift+s exec "slock"
+bindsym --release $mod+Shift+s exec "slock-with-dpms"
 
-exec --no-startup-id "setxkbmap -model pc105 -layout us,se -variant euro, -option grp:alt_shift_toggle"
-exec --no-startup-id "nm-applet"
+#exec --no-startup-id "setxkbmap -model pc105 -layout us,se -variant euro, -option grp:alt_shift_toggle"
+#setxkbmap -layout se,us -variant ,intl -option -option grp:alt_space_toggle
+#exec --no-startup-id "nm-applet"
 
 # Media keys
 # Pulse Audio controls
@@ -226,11 +230,26 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86MonBrightnessDown exec change-backlight -dec 10
 bindsym XF86MonBrightnessUp exec change-backlight -inc 10
 
+# Enforce floating for epicsQTDM
+for_window [class="CaQtDM"] floating enable
+for_window [class="Pylauncher"] floating enable
+for_window [class="zoom"] floating enable
+for_window [class="Skype"] floating enable
 
 # Tell gnome session that we are started..
-exec --no-startup-id echo "$0: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager"
-exec --no-startup-id dbus-send --session --print-reply=literal --dest=org.gnome.SessionManager "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient "string:i3" "string:$DESKTOP_AUTOSTART_ID"
+#exec --no-startup-id echo "$0: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager"
+#exec --no-startup-id dbus-send --session --print-reply=literal --dest=org.gnome.SessionManager "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient "string:i3" "string:$DESKTOP_AUTOSTART_ID"
+#exec --no-startup-id /usr/lib/gnome-settings-daemon/gnome-settings-daemon-localeexec
 
 # Run compton
 exec --no-startup-id compton -b
 exec --no-startup-id feh --randomize --bg-scale /usr/share/backgrounds/*.jpg
+exec --no-startup-id synclient VertScrollDelta=-113
+exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
+
+# Slow down mouse
+exec --no-startup-id xinput --set-prop "Logitech M705" 'Coordinate Transformation Matrix' 0.5 0 0 0 0.5 0 0 0 1
+exec --no-startup-id xinput --set-prop "Logitech M705" 'libinput Accel Speed' -0.5
+
+# Set X Screen DPI to match laptop screen DPI
+exec --no-startup-id xrandr --dpi eDP-1

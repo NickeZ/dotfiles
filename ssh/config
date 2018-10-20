@@ -1,7 +1,7 @@
-host *
-    ServerAliveInterval 300
-    ServerAliveCountMax 2
-    GSSAPIAuthentication no
+#host *
+#    ServerAliveInterval 300
+#    ServerAliveCountMax 2
+#    GSSAPIAuthentication no
 
 host bjartmarhylta
     HostName 77.110.7.87
@@ -95,7 +95,29 @@ host *.ncic.se ncic.se
 host 194.47.242.31
     ForwardAgent yes
 
-host sf-lc
-    UserKnownHostsFile /dev/null
-    StrictHostKeyChecking no
+# balrog, hop
+host sf-* sls-* pc7920 pc11509 pc11508 *.psi.ch
+    ForwardX11Trusted yes
+    #UserKnownHostsFile /dev/null
+    #StrictHostKeyChecking no
     user claesson_n
+
+host sf-lc-via-hop
+    hostname sf-lc.psi.ch
+    #UserKnownHostsFile /dev/null
+    #StrictHostKeyChecking no
+    user claesson_n
+    ProxyCommand ssh -A -W %h:%p hop.psi.ch
+    DynamicForward 8888
+
+host panda-via-hop
+    hostname pc12824.psi.ch
+    #UserKnownHostsFile /dev/null
+    #StrictHostKeyChecking no
+    user root
+    ProxyCommand ssh -A -W %h:%p hop.psi.ch
+
+# QS build machine
+host nc-jenkins-slave
+    hostname 10.71.0.124
+    user nclaesson

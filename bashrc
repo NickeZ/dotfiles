@@ -4,6 +4,7 @@
 GIT_PS1_SHOWUPSTREAM="auto"
 GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
+GIT_PS1_SHOWCOLORHINTS=1
 . $HOME/git/dotfiles/git-prompt.sh
 
 ## Bash config
@@ -49,8 +50,9 @@ if [ -n "$DISPLAY" -a "$TERM" == "xterm" ]; then
 fi
 
 # Base16 Shell
-BASE16_SHELL="$HOME/git/dotfiles/vendor/base16-shell/scripts/base16-solarized-dark.sh"
-[[ "$-" == *i* ]] && [[ -s $BASE16_SHELL ]] && . "$BASE16_SHELL"
+#BASE16_SHELL="$HOME/git/dotfiles/vendor/base16-shell/scripts/base16-solarized-dark.sh"
+#BASE16_SHELL="$HOME/git/dotfiles/vendor/base16-shell/scripts/base16-solarized-light.sh"
+#[[ "$-" == *i* ]] && [[ -s $BASE16_SHELL ]] && . "$BASE16_SHELL"
 
 alias fixssh="ln --symbolic --no-dereference --force $(find /tmp -path '/tmp/ssh-*/agent.*' -user "$USER" -type s 2> /dev/null | head -1) $HOME/.ssh/ssh_auth_sock.$(hostname)"
 

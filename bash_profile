@@ -38,6 +38,14 @@ if [ -d "$HOME/.local/bin" ] ; then
 			PATH="$HOME/.local/bin:$PATH"
 	esac
 fi
+if [ -d "$HOME/go/bin" ] ; then
+	case "$PATH" in
+		*:"$HOME/go/bin":*)
+			;;
+		*)
+			PATH="$HOME/go/bin:$PATH"
+	esac
+fi
 
 # Set locale stuff
 #export LC_ALL="en_US.utf8"

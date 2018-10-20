@@ -25,3 +25,7 @@ slask.php
 tags
 .local.vimrc
 .nvimlog
+build
+build-clang
+.clang_complete
+.*
