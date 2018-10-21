@@ -19,7 +19,7 @@ if [ -d "/usr/local/epics/base/bin/linux-x86_64" ] ; then
 fi
 
 # Set path to rustc/cargo
-[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
+# [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
