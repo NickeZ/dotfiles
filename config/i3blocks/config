@@ -116,11 +116,11 @@ instance=0
 interval=30
 separator=false
 
-[battery]
-label=BAT1
+# [battery]
+# label=BAT1
 #label=⚡
-instance=1
-interval=30
+# instance=1
+# interval=30
 
 # Date Time
 #

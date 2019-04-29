@@ -28,4 +28,4 @@ tags
 build
 build-clang
 .clang_complete
-.*
+env

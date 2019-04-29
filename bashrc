@@ -61,3 +61,6 @@ alias fixssh="ln --symbolic --no-dereference --force $(find /tmp -path '/tmp/ssh
 #[[ -f ~/.local/bin/rustc ]] && export RUSTC=~/.local/bin/rustc
 
 alias docker-rmexited="sudo sh -c 'docker ps -a | /bin/grep Exit | cut -d \" \" -f 1 | xargs docker rm'"
+
+#eval "$(register-python-argcomplete swit2)"
+#eval "$(activate-global-python-argcomplete --dest=-)"

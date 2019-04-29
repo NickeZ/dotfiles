@@ -1,0 +1,9 @@
+{
+        "pyls": {
+                "plugins": {
+                        "pycodestyle": {
+                                "enabled": false
+                        }
+                }
+        }
+}

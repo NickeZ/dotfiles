@@ -14,7 +14,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:hack 6
+font pango:hack nerd font mono 6
 #font pango:IBM Plex Mono 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
@@ -24,11 +24,11 @@ font pango:hack 6
 # Theming
 for_window [class="^.*"] border pixel 1
 # class                 border  backgr. text    indica. child_.
-client.focused          #d9d6ca #1c1c22 #d9d6ca #5c828d #5c828d
-client.unfocused        #d9d6ca #1c1c22 #d9d6ca #3e646f #3e646f
-client.focused_inactive #d9d6ca #1c1c22 #d9d6ca #3e646f #3e646f
-client.urgent           #d9d6ca #1c1c22 #d9d6ca #3e646f #3e646f
-client.placeholder      #d9d6ca #1c1c22 #d9d6ca #3e646f #3e646f
+client.focused          #3e646f #3e646f #1c1c22 #5c828d #5c828d
+client.unfocused        #1c1c22 #1c1c22 #9aa7c0 #3e646f #3e646f
+client.focused_inactive #1c1c22 #1c1c22 #9aa7c0 #3e646f #3e646f
+client.urgent           #1c1c22 #1c1c22 #9aa7c0 #3e646f #3e646f
+client.placeholder      #1c1c22 #1c1c22 #9aa7c0 #3e646f #3e646f
 
 client.background       #1c1c22
 
@@ -43,7 +43,7 @@ client.background       #1c1c22
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec alacritty -vv
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -150,17 +150,21 @@ bindsym $mod+8 workspace $tag8
 bindsym $mod+9 workspace $tag9
 bindsym $mod+0 workspace $tag10
 
+set $int_output eDP-1
+# set $external_output DP-1
+set $ext_output HDMI-2
+
 # bind workspace to monitor
-workspace $tag1 output eDP-1
-workspace $tag2 output eDP-1
-workspace $tag3 output eDP-1
-workspace $tag4 output DP-1
-workspace $tag5 output DP-1
-workspace $tag6 output DP-1
-workspace $tag7 output DP-1
-workspace $tag8 output DP-1
-workspace $tag9 output DP-1
-workspace $tag10 output eDP-1
+workspace $tag1 output $int_output
+workspace $tag2 output $int_output
+workspace $tag3 output $int_output
+workspace $tag4 output $ext_output
+workspace $tag5 output $ext_output
+workspace $tag6 output $ext_output
+workspace $tag7 output $ext_output
+workspace $tag8 output $ext_output
+workspace $tag9 output $ext_output
+workspace $tag10 output $int_output
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $tag1
@@ -233,14 +237,15 @@ bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 
 # Screen brightness keys
-bindsym XF86MonBrightnessDown exec change-backlight -dec 10
-bindsym XF86MonBrightnessUp exec change-backlight -inc 10
+bindsym XF86MonBrightnessDown exec --no-startup-id backlight dec 5
+bindsym XF86MonBrightnessUp exec --no-startup-id backlight inc 5
 
 # Enforce floating for epicsQTDM
 for_window [class="CaQtDM"] floating enable
 for_window [class="Pylauncher"] floating enable
 for_window [class="zoom"] floating enable
 for_window [class="Skype"] floating enable
+for_window [class="alh"] floating enable
 
 # Tell gnome session that we are started..
 #exec --no-startup-id echo "$0: DESKTOP_AUTOSTART_ID $DESKTOP_AUTOSTART_ID, registering with org.gnome.SessionManager"
@@ -265,8 +270,8 @@ exec --no-startup-id /home/niklas/.config/i3/touchpad-init
 exec --no-startup-id xrandr --dpi eDP-1
 
 # Enable/disable monitor
-bindsym $mod+m         exec --no-startup-id xrandr --output DP-1 --off
-bindsym $mod+shift+m   exec --no-startup-id xrandr --output eDP-1 --auto --primary --output DP-1 --auto --right-of eDP-1
+bindsym $mod+m         exec --no-startup-id xrandr --output DP-1 --off --output HDMI-2 --off
+bindsym $mod+shift+m   exec --no-startup-id xrandr --output eDP-1 --auto --primary --output DP-1 --auto --right-of eDP-1 --output HDMI-2 --auto --right-of eDP-1
 
 # Screenlocker
 bindsym --release $mod+Shift+s exec "slock-with-dpms"
@@ -275,3 +280,4 @@ bindsym --release $mod+Shift+s exec "slock-with-dpms"
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id owncloud
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
