@@ -3,15 +3,15 @@
 
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
-# set by alacritty it self.
+# set by alacritty itself.
 env:
-  # TERM env customization.
+  # TERM variable
   #
-  # If this property is not set, alacritty will set it to xterm-256color.
-  #
-  # Note that some xterm terminfo databases don't declare support for italics.
-  # You can verify this by checking for the presence of `smso` and `sitm` in
-  # `infocmp xterm-256color`.
+  # This value is used to set the `$TERM` environment variable for
+  # each instance of Alacritty. If it is not present, alacritty will
+  # check the local terminfo database and use `alacritty` if it is
+  # available, otherwise `xterm-256color` is used.
+  #TERM: xterm-256color
   TERM: xterm-256color
 
 window:
@@ -22,6 +22,14 @@ window:
   dimensions:
     columns: 0
     lines: 0
+
+  # Window position (changes require restart)
+  #
+  # Specified in number of pixels.
+  # If the position is not set, the window manager will handle the placement.
+  #position:
+  #  x: 0
+  #  y: 0
 
   # Window padding (changes require restart)
   #
@@ -45,8 +53,16 @@ window:
   #     - buttonless: Title bar, transparent background, but no title bar buttons
   decorations: full
 
-  # When true, alacritty starts maximized.
-  start_maximized: false
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  startup_mode: Windowed
 
 scrolling:
   # Maximum number of lines in the scrollback buffer.
@@ -116,7 +132,7 @@ font:
     #style: Italic
 
   # Point size
-  size: 8.0
+  size: 10.0
   # Size 8 is optimal for laptop, 9 for external screen
   # size: 6
 
@@ -181,6 +197,15 @@ colors:
   #  text: '0x000000'
   #  cursor: '0xffffff'
 
+  # Selection colors
+  #
+  # Colors which should be used to draw the selection area. If selection
+  # background is unset, selection color will be the inverse of the cell colors.
+  # If only text is unset the cell text color will remain the same.
+  #selection:
+  #  text: '0xeaeaea'
+  #  background: '0x404040'
+
   # Normal colors
   normal:
     black:   '0x002b36'
@@ -225,7 +250,7 @@ colors:
   # Example:
   #   `- { index: 16, color: '0xff00ff' }`
   #
-  #indexed_colors: []
+  indexed_colors: []
 
 # Visual Bell
 #
@@ -301,7 +326,9 @@ mouse:
     #   - (macOS) open
     #   - (Linux) xdg-open
     #   - (Windows) explorer
-    #launcher: xdg-open
+    #launcher:
+    #  program: xdg-open
+    #  args: []
 
     # URL modifiers
     #
@@ -375,7 +402,7 @@ alt_send_esc: true
 # mapped to the `None` action.
 #
 # Example:
-#   `- { key: V, mods: Command, action: Paste }`
+#   `- { key: V, mods: Control|Shift, action: Paste }`
 #
 # Available fields:
 #   - key
@@ -425,6 +452,8 @@ alt_send_esc: true
 #   - ResetFontSize
 #   - ScrollPageUp
 #   - ScrollPageDown
+#   - ScrollLineUp
+#   - ScrollLineDown
 #   - ScrollToTop
 #   - ScrollToBottom
 #   - ClearHistory
@@ -432,7 +461,11 @@ alt_send_esc: true
 #   - Quit
 #   - ClearLogNotice
 #   - SpawnNewInstance
+#   - ToggleFullscreen
 #   - None
+#
+# Values for `action` (macOS only):
+#   - ToggleSimpleFullscreen: Enters fullscreen without occupying another space
 #
 # Values for `command`:
 #   The `command` field must be a map containing a `program` string and
@@ -454,18 +487,21 @@ key_bindings:
   - { key: Key0,     mods: Control, action: ResetFontSize                }
   - { key: Equals,   mods: Control, action: IncreaseFontSize             }
   - { key: Subtract, mods: Control, action: DecreaseFontSize             }
+  #- { key: Subtract, mods: Control,       action: DecreaseFontSize }
+  #- { key: Minus,    mods: Control,       action: DecreaseFontSize }
 
   # (macOS only)
-  #- { key: Key0,     mods: Command, action: ResetFontSize                }
-  #- { key: Equals,   mods: Command, action: IncreaseFontSize             }
-  #- { key: Minus,    mods: Command, action: DecreaseFontSize             }
-  #- { key: K,        mods: Command, action: ClearHistory                 }
-  #- { key: K,        mods: Command, chars: "\x0c"                        }
-  #- { key: V,        mods: Command, action: Paste                        }
-  #- { key: C,        mods: Command, action: Copy                         }
-  #- { key: H,        mods: Command, action: Hide                         }
-  #- { key: Q,        mods: Command, action: Quit                         }
-  #- { key: W,        mods: Command, action: Quit                         }
+  #- { key: Key0,   mods: Command, action: ResetFontSize    }
+  #- { key: Equals, mods: Command, action: IncreaseFontSize }
+  #- { key: Add,    mods: Command, action: IncreaseFontSize }
+  #- { key: Minus,  mods: Command, action: DecreaseFontSize }
+  #- { key: K,      mods: Command, action: ClearHistory     }
+  #- { key: K,      mods: Command, chars: "\x0c"            }
+  #- { key: V,      mods: Command, action: Paste            }
+  #- { key: C,      mods: Command, action: Copy             }
+  #- { key: H,      mods: Command, action: Hide             }
+  #- { key: Q,      mods: Command, action: Quit             }
+  #- { key: W,      mods: Command, action: Quit             }
 
   - { key: Paste,                   action: Paste                        }
   - { key: Copy,                    action: Copy                         }
