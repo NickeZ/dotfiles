@@ -14,32 +14,7 @@ HISTFILESIZE=10000
 PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u \[\033[01;34m\]@ \[\033[01;35m\]\h\[\033[00m\] : \[\033[01;34m\]\w\[\033[00m\]$(__git_ps1 " (%s)")\n\$ '
 unset color_prompt force_color_prompt
 
-xil10_init () {
-. /opt/Xilinx/10.1/ISE/settings64.sh
-. /opt/Xilinx/10.1/EDK/settings64.sh
-export LD_PRELOAD=/opt/Xilinx/lib/libusb-driver.so
-}
-
-xil13_init () {
-. /opt/Xilinx/13.4/ISE_DS/settings64.sh
-}
-
-xil14_init () {
-local OPT=/home/niklas-sl/opt
-XIL_CSE_PLUGIN_DIR=$HOME/.cse
-. $OPT/Xilinx/14.4/ISE_DS/settings64.sh
-}
-
-xil147_init () {
-. /home/niklas/opt/Xilinx/14.7/ISE_DS/settings64.sh
-}
-
-alias update='sudo apt-get update && sudo apt-get dist-upgrade -y'
-alias altera_init="export PATH=${PATH}:/home/niklas-sl/opt/altera/12.1/quartus/bin"
 alias bc="bc -l"
-alias grep='grep --exclude-dir=.svn --line-number --color=auto'
-alias indentCosy="indent -linux -i2 -nut"
-alias evnova="WINEPREFIX=$HOME/.wine_evnova wine start \"$HOME/.wine_evnova/drive_c/users/niklas/Start Menu/Programs/EV Nova/EV Nova.lnk\""
 
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
 	SSH_AUTH_SOCK=$HOME/.ssh/ssh_auth_sock.$(hostname)
@@ -54,13 +29,4 @@ fi
 #BASE16_SHELL="$HOME/git/dotfiles/vendor/base16-shell/scripts/base16-solarized-light.sh"
 #[[ "$-" == *i* ]] && [[ -s $BASE16_SHELL ]] && . "$BASE16_SHELL"
 
-alias fixssh="ln --symbolic --no-dereference --force $(find /tmp -path '/tmp/ssh-*/agent.*' -user "$USER" -type s 2> /dev/null | head -1) $HOME/.ssh/ssh_auth_sock.$(hostname)"
-
-#export CARGO_INCREMENTAL=1
-# breaks projects with their own rustc (i.e. servo)
-#[[ -f ~/.local/bin/rustc ]] && export RUSTC=~/.local/bin/rustc
-
 alias docker-rmexited="sudo sh -c 'docker ps -a | /bin/grep Exit | cut -d \" \" -f 1 | xargs docker rm'"
-
-#eval "$(register-python-argcomplete swit2)"
-#eval "$(activate-global-python-argcomplete --dest=-)"
