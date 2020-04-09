@@ -1,9 +1,14 @@
 [user]
     name=Niklas Claesson
     email=nicke.claesson@gmail.com
+        signingkey = A4E7C031241B3BAB0EF2951EEF0659526746AA92
 [core]
     excludesfile = ~/.gitignore
     eol = lf
+	editor = vim
+
+[commit]
+    gpgsign = true
 
 [color]
     branch = auto
@@ -34,9 +39,14 @@
     l = log --graph --pretty=format:'%C(yellow)%h%Creset%C(blue)%d%Creset %C(white bold)%s%Creset %C(white dim)(by %an %ar)%Creset'
     ll = !git l --all
     pr = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+    refresh = "!r() { [ \"$(git rev-parse --abbrev-ref HEAD)\" = \"master\" ] || { echo Not on master; exit 1; } && git fetch upstream && git merge upstream/master && git push; }; r"
 [push]
     default = current
 [credential]
 	helper = cache
 [diff]
 	tool = cdiff
+[tag]
+	forceSignAnnotated = true
+[merge]
+	tool = vimdiff

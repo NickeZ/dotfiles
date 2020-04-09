@@ -30,3 +30,7 @@ fi
 #[[ "$-" == *i* ]] && [[ -s $BASE16_SHELL ]] && . "$BASE16_SHELL"
 
 alias docker-rmexited="sudo sh -c 'docker ps -a | /bin/grep Exit | cut -d \" \" -f 1 | xargs docker rm'"
+
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgrep/ripgreprc
+
+PATH=/home/niklas/.daml/bin:$PATH

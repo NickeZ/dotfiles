@@ -2,16 +2,18 @@ scriptencoding utf-8
 
 call plug#begin()
 
+Plug 'neovim/nvim-lsp'
+
 Plug 'junegunn/vader.vim'
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-"Plug 'rust-lang/rust.vim'
+"Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+Plug 'rust-lang/rust.vim'
 Plug 'christoomey/vim-tmux-navigator'
 "Plug 'NickeZ/base16-vim', { 'branch': 'improve-highlight-readability' }
 Plug 'neomake/neomake'
 Plug 'airblade/vim-gitgutter'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Shougo/echodoc.vim'
-Plug 'kana/vim-smartinput'
+"Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"Plug 'Shougo/echodoc.vim'
+"Plug 'kana/vim-smartinput'
 "Plug 'Rip-Rip/clang_complete'
 " Vimfiler depends on unite
 "Plug 'Shougo/unite.vim'
@@ -27,7 +29,14 @@ Plug 'rhysd/vim-clang-format'
 Plug 'itchyny/lightline.vim'
 Plug 'justinmk/vim-sneak'
 
+Plug 'embear/vim-localvimrc'
+Plug 'dart-lang/dart-vim-plugin'
+let g:localvimrc_sandbox = 0
+let g:localvimrc_persistent = 2
+
 call plug#end()
+
+lua require'nvim_lsp'.rust_analyzer.setup({})
 
 " Remove -- INSERT --
 set noshowmode
@@ -81,7 +90,18 @@ call neomake#configure#automake('nrw', 500)
 augroup filetype_rust
   autocmd!
   autocmd BufWritePost *.rs :Neomake! clippy
+  autocmd Filetype rust setlocal omnifunc=v:lua.vim.lsp.omnifunc
+  autocmd FileType rust nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+  autocmd FileType rust nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+  autocmd FileType rust nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+  autocmd FileType rust nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+  autocmd FileType rust nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+  autocmd FileType rust nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+  autocmd FileType rust nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 augroup END
+
+" Always show signcolumn
+set signcolumn=yes:1
 
 
 " Neomake configuration
@@ -91,10 +111,11 @@ augroup END
 let g:neomake_open_list = 2
 
 " Default to GCC instead of clang
-let g:neomake_c_enabled_makers = ['gcc']
+let g:neomake_c_enabled_makers = []
+let g:neomake_c_clangcheck_exe = "clang-check-8"
 let g:neomake_cpp_enabled_makers = ['gcc']
 " use python lang server instead
-let g:neomake_python_enabled_makers = ['pylint']
+let g:neomake_python_enabled_makers = ['pylint', 'mypy']
 "let g:neomake_python_enabled_makers = []
 " use rust lang server or clippy instead
 let g:neomake_rust_enabled_makers = []
@@ -116,14 +137,20 @@ let g:neomake_python_python_exe = 'python3'
 
 augroup filetype_c
   autocmd!
-  autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-  autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+  autocmd FileType c,cpp nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+  autocmd FileType c,cpp vnoremap <buffer><Leader>cf :ClangFormat<CR>
+  autocmd FileType c,cpp setlocal shiftwidth=4
 augroup END
 "autocmd FileType c,cpp,objc nnoremap <buffer><C-r><C-d> :<C-u>ClangFormat<CR>
 "
-let g:clang_format#command = 'clang-format-6.0'
+let g:clang_format#command = 'clang-format-7'
 
-" Sample configuration to put in .local.vimrc
+augroup filetype_xml
+  autocmd!
+  autocmd Filetype xml setlocal shiftwidth=2
+augroup END
+
+" Sample configuration to put in .lvimrc
 "let g:neomake_c_gcc_args = ['-fsyntax-only', '-Wall', '-Wextra', '-I/opt/epics/bases/base-3.14.12.5/include', '-I/opt/epics/bases/base-3.14.12.5/include/os/Linux', '-I/opt/epics/modules/environment/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/asyn/4.27.0/3.14.12.5/include', '-I/opt/epics/modules/ifcdaqdrv/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/nds3/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/devlib2/2.6.0/3.14.12.5/include', '-I/opt/epics/modules/ifcdaqdrv/niklasclaesson/3.14.12.5/include']
 "let g:neomake_cpp_gcc_args = ['-fsyntax-only', '-Wall', '-Wextra', '-std=c++0x', '-I/opt/epics/bases/base-3.14.12.5/include', '-I/opt/epics/bases/base-3.14.12.5/include/os/Linux', '-I/opt/epics/modules/environment/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/asyn/4.27.0/3.14.12.5/include', '-I/opt/epics/modules/ifcdaqdrv/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/nds3/niklasclaesson/3.14.12.5/include', '-I/opt/epics/modules/devlib2/2.6.0/3.14.12.5/include', '-I/opt/epics/modules/ifcdaqdrv/niklasclaesson/3.14.12.5/include']
 "let g:neomake_cpp_gcc_exe = 'neomake-cpp'
@@ -144,22 +171,28 @@ let g:LanguageClient_settingsPath = expand('~/.config/nvim/settings.json')
 "let g:LanguageClient_loggingFile = '/tmp/niklas.log'
 "let g:LanguageClient_loggingLevel = 'DEBUG'
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-nnoremap <silent> <leader>lf :call LanguageClient_textDocument_formatting()<CR>
-nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+" nnoremap <silent> <leader>lf :call LanguageClient_textDocument_formatting()<CR>
+" nnoremap <silent> <leader>e :call LanguageClient#explainErrorAtPoint()<CR>
+
+
+
 
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+let g:rustfmt_autosave = 1
+let g:rustfmt_options = '--edition 2018'
 
 " Enable clang format for c/c++
 " TODO(nc): Only enablef or c/c++
 " map <C-K> :pyf /usr/share/clang/clang-format-3.9/clang-format.py<cr>
 " imap <C-K> <c-o>:pyf /usr/share/clang/clang-format-3.9/clang-format.py<cr>
 
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#source('LanguageClient', 'min_pattern_length', 2)
+" let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#source('LanguageClient', 'min_pattern_length', 2)
 
 " Configure vimfiler
 "let g:vimfiler_as_default_explorer = 1
@@ -195,11 +228,18 @@ set expandtab
 set ruler
 set number
 
+" tabstop - number of spaces that <Tab> counts for
+" softtabstop - number of spaces that <Tab> counts for while performing editing operations (like
+"               inserting a <Tab> or <BS>). -1 means use 'shiftwidth'
+" shiftwidth - number of spaces to use after each step of (auto)indent
+set softtabstop=-1
+
 " Define indentation different per source
 augroup filetype_sh
   autocmd!
-  autocmd FileType sh set expandtab!
-  autocmd FileType sh set tabstop=4
+  autocmd FileType sh setlocal noexpandtab
+  autocmd FileType sh setlocal tabstop=4
+  autocmd FileType sh setlocal shiftwidth=4
 augroup END
 
 " Use google default for cpp
@@ -208,19 +248,29 @@ augroup END
 
 augroup filetype_js
   autocmd!
-  autocmd FileType javascript,yaml set softtabstop=2
-  autocmd FileType javascript,yaml set shiftwidth=2
+  autocmd FileType javascript,yaml setlocal shiftwidth=2
 augroup END
 
 augroup filetype_python
   autocmd!
-  autocmd FileType python setlocal textwidth=79
-  autocmd FileType python setlocal colorcolumn=73,+1
+  autocmd FileType python setlocal textwidth=99
+  autocmd FileType python setlocal colorcolumn=93,+1
 augroup END
 
 augroup filetype_php
   autocmd!
-  autocmd FileType php setlocal tabstop=2
+  autocmd FileType php setlocal shiftwidth=2
+augroup END
+
+augroup filetype_cmake
+  autocmd!
+  autocmd FileType cmake setlocal shiftwidth=2
+  autocmd FileType cmake setlocal textwidth=0
+augroup END
+
+augroup filetype_rs
+  autocmd!
+  autocmd FileType rust noremap <Leader>f :RustFmt<CR>
 augroup END
 
 " Indentation for cpp
@@ -271,4 +321,15 @@ set incsearch
 set ignorecase
 set smartcase
 
+set path+=**
+
 "let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
+
+set grepprg=rg\ -n
+
+noremap <Leader>m :make!<CR>
