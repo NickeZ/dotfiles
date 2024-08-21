@@ -39,6 +39,7 @@ vim.api.nvim_create_autocmd('Filetype', { pattern = 'rust', command = 'set color
 -- show more hidden characters
 -- also, show tabs nicer
 vim.opt.listchars = 'tab:^ ,nbsp:¬,extends:»,precedes:«,trail:•'
+vim.opt.list = true
 
 -- hotkeys
 -- quick-open

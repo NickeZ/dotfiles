@@ -1,7 +1,6 @@
 [user]
     name = Niklas Dusenlund
     email = niklas.dusenlund@bitbox.swiss
-    pager = delta
 [ui "color"]
     ui = always
 [color]
@@ -9,6 +8,7 @@
 [core]
     excludesFile = ~/.gitignore
     editor = nvim
+    pager = delta
 [merge]
     tool = nvim -d
 [commit]
@@ -18,7 +18,7 @@
     s = status
     st = status
     lg = log --oneline
-    last = log -1 HEAD  
+    last = log -1 HEAD
     cl = log -p -- ':(exclude)Cargo.lock'
     f = push --force-with-lease
     l = log --graph --pretty=format:'%C(yellow)%h%Creset%C(blue)%d%Creset %C(white bold)%s%Creset %C(white dim)(by %an %ar)%Creset'
@@ -39,6 +39,7 @@
     diffFilter = delta --color-only
 [delta]
     navigate = true
+    line-numbers = true
 [merge]
     conflictstyle = diff3
 [diff]
