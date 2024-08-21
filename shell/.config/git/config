@@ -1,6 +1,7 @@
 [user]
     name = Niklas Dusenlund
     email = niklas.dusenlund@bitbox.swiss
+    pager = delta
 [ui "color"]
     ui = always
 [color]
@@ -34,3 +35,11 @@
     indentHeuristic = true
 [protocol]
     version = 2
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
