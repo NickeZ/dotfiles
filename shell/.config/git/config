@@ -1,0 +1,40 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+    name = Niklas Dusenlund
+    email = niklas.dusenlund@bitbox.swiss
+[ui "color"]
+    ui = always
+[color]
+    ui = true
+[core]
+    excludesFile = ~/.gitignore
+    editor = nvim
+[merge]
+    tool = nvim -d
+[commit]
+    gpgsign = true
+[alias]
+    c = commit
+    s = status
+    st = status
+    lg = log --oneline
+    last = log -1 HEAD  
+    cl = log -p -- ':(exclude)Cargo.lock'
+    f = push --force-with-lease
+    l = log --graph --pretty=format:'%C(yellow)%h%Creset%C(blue)%d%Creset %C(white bold)%s%Creset %C(white dim)(by %an %ar)%Creset'
+    ll = !git l --all
+    pr = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+[pull]
+    ff = only
+[push]
+    default = simple
+[help]
+    autocorrect = 1
+[diff]
+    algorithm = histogram
+    indentHeuristic = true
+[protocol]
+    version = 2
+[init]
+    defaultBranch = main
