@@ -52,7 +52,12 @@ vim.keymap.set('', 'L', '$')
 -- make j and k move by visual line, not actual line, when text is soft-wrapped
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
+-- Ctrl+h to stop searching
+vim.keymap.set('v', '<C-h>', '<cmd>nohlsearch<cr>')
+vim.keymap.set('n', '<C-h>', '<cmd>nohlsearch<cr>')
 
+-- Jump to next diagnostic
+vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 
 
 -- Plugins!
@@ -106,6 +111,39 @@ require("lazy").setup({
         },
         'nvim-treesitter/nvim-treesitter',
         'sindrets/diffview.nvim',
+        {
+            'neovim/nvim-lspconfig',
+            config = function ()
+                local lspconfig = require('lspconfig')
+
+                -- C/C++
+                lspconfig.clangd.setup {
+                    cmd = { '/opt/clangd/bin/clangd' },
+                }
+
+                -- Rust
+                lspconfig.rust_analyzer.setup {
+                    -- Server-specific settings. See `:help lspconfig-setup`
+                    settings = {
+                        ["rust-analyzer"] = {
+                            cargo = {
+                                allFeatures = true,
+                            },
+                            imports = {
+                                group = {
+                                    enable = false,
+                                },
+                            },
+                            completion = {
+                                postfix = {
+                                    enable = false,
+                                },
+                            },
+                        },
+                    },
+                }
+            end
+        },
 
         -- add your plugins here
     },
