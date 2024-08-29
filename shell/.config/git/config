@@ -6,7 +6,7 @@
 [color]
     ui = true
 [core]
-    excludesFile = ~/.gitignore
+    excludesFile = ~/.config/git/ignore
     editor = nvim
     pager = delta
 [merge]
