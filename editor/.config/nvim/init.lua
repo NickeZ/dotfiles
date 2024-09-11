@@ -17,7 +17,6 @@ vim.opt.splitbelow = true
 -- tabs: go big or go home
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
-vim.opt.tabstop = 4
 vim.opt.expandtab = true
 -- case-insensitive search/replace
 vim.opt.ignorecase = true
@@ -53,8 +52,8 @@ vim.keymap.set('', 'L', '$')
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
 -- Ctrl+h to stop searching
-vim.keymap.set('v', '<C-h>', '<cmd>nohlsearch<cr>')
-vim.keymap.set('n', '<C-h>', '<cmd>nohlsearch<cr>')
+vim.keymap.set('v', '<C-g>', '<cmd>nohlsearch<cr>')
+vim.keymap.set('n', '<C-g>', '<cmd>nohlsearch<cr>')
 
 -- Jump to next diagnostic
 vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
@@ -160,6 +159,18 @@ require("lazy").setup({
                 { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
                 { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
             },
+        },
+
+        -- rust
+        {
+            'rust-lang/rust.vim',
+            ft = { "rust" },
+            config = function()
+                vim.g.rustfmt_autosave = 1
+                vim.g.rustfmt_emit_files = 1
+                vim.g.rustfmt_fail_silently = 0
+                vim.g.rust_clip_command = 'wl-copy'
+            end
         },
     },
 })

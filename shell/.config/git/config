@@ -8,9 +8,8 @@
 [core]
     excludesFile = ~/.config/git/ignore
     editor = nvim
-    pager = delta
 [merge]
-    tool = nvim -d
+    tool = nvimdiff
 [commit]
     gpgsign = true
 [alias]
@@ -28,6 +27,8 @@
     ff = only
 [push]
     default = simple
+[fetch]
+    prune = 1
 [help]
     autocorrect = 1
 [diff]
@@ -35,12 +36,6 @@
     indentHeuristic = true
 [protocol]
     version = 2
-[interactive]
-    diffFilter = delta --color-only
-[delta]
-    navigate = true
-    line-numbers = true
-    side-by-side = true
 [merge]
     conflictstyle = diff3
 [diff]
