@@ -2,3 +2,4 @@ niklas
 .cache
 *.swp
 Keil_5
+.venv

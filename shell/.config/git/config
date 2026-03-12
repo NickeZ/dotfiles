@@ -1,10 +1,16 @@
 [user]
     name = Niklas Dusenlund
     email = niklas.dusenlund@bitbox.swiss
+[branch]
+    sort = -committerdate
 [ui "color"]
     ui = always
 [color]
     ui = true
+[column]
+    ui = auto
+[tag]
+    sort = version:refname
 [core]
     excludesFile = ~/.config/git/ignore
     editor = nvim
@@ -12,6 +18,14 @@
     tool = nvimdiff
 [commit]
     gpgsign = true
+    verbose = true
+[rerere]
+    enabled = true
+    autoupdate = true
+[rebase]
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
 [alias]
     c = commit
     s = status
@@ -19,24 +33,45 @@
     lg = log --oneline
     last = log -1 HEAD
     cl = log -p -- ':(exclude)Cargo.lock'
-    f = push --force-with-lease
+    f = push-stack
     l = log --graph --pretty=format:'%C(yellow)%h%Creset%C(blue)%d%Creset %C(white bold)%s%Creset %C(white dim)(by %an %ar)%Creset'
-    ll = !git l --all
+    ll = !git l --exclude 'refs/remotes/upstream/pr/*' --all
     pr = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/merge:pr/$1 && git checkout pr/$1; }; f"
+    wt-pr = "!f() { git fetch -fu ${2:-$(git remote |grep ^upstream || echo origin)} refs/pull/$1/merge:pr/$1 && git wt add ../pr/$1 pr/$1; }; f"
+    wt = worktree
+    rm-merged = !git branch --merged master | grep -Ev '(^\\*|^\\+|master|main)' | xargs --no-run-if-empty git branch -d
+    rm-pr = !git branch --list 'pr/*' | xargs --no-run-if-empty git branch -D
+    default-branch = "!git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'"
+    merge-base-origin = "!f() { git merge-base ${1-HEAD} origin/$(git default-branch); };f "
+    stack = "!f() { BRANCH=${1-HEAD}; MERGE_BASE=$(git merge-base-origin $BRANCH); git log --decorate-refs=refs/heads --simplify-by-decoration --pretty=format:\"%(decorate:prefix=,suffix=,tag=,separator=%n)\" $MERGE_BASE..$BRANCH; };f "
+    push-stack = "!f() { BRANCH=${1-HEAD};  git stack $BRANCH | xargs -I {} git push --force-with-lease origin {}; };f "
 [pull]
     ff = only
 [push]
     default = simple
+    autoSetupRemote = true
+    followTags = true
 [fetch]
-    prune = 1
+    prune = true
+    all = true
 [help]
     autocorrect = 1
 [diff]
     algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
     indentHeuristic = true
 [protocol]
     version = 2
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 [diff]
     colorMoved = default
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+[safe]
+	directory = /Users/niklasdusenlund/projects/shift/review-10-login
