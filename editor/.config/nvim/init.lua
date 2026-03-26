@@ -49,9 +49,9 @@ vim.opt.modeline = false
 
 -- hotkeys
 -- quick-open
-vim.keymap.set('', '<C-p>', '<cmd>Files<cr>')
+-- vim.keymap.set('', '<C-p>', '<cmd>Files<cr>')
 -- search buffers
-vim.keymap.set('n', '<leader>;', '<cmd>Buffers<cr>')
+-- vim.keymap.set('n', '<leader>;', '<cmd>Buffers<cr>')
 -- Jump to start and end of line using the home row keys
 vim.keymap.set('', 'H', '^')
 vim.keymap.set('', 'L', '$')
@@ -75,7 +75,7 @@ vim.keymap.set('n', '<right>', ':tn<cr>')
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]g", vim.diagnostic.goto_next)
 
-vim.lsp.set_log_level("off")
+--vim.lsp.set_log_level("debug")
 
 -- format c source and headers with clang-format
 -- XXX: Replaced with lsp config below
@@ -87,8 +87,8 @@ vim.lsp.set_log_level("off")
 -- })
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
+    callback = function(event)
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
         --if client.supports_method('textDocument/implementation') then
         --  -- Create a keymap for vim.lsp.buf.implementation
         --end
@@ -96,17 +96,34 @@ vim.api.nvim_create_autocmd('LspAttach', {
         --  -- Enable auto-completion
         --  vim.lsp.completion.enable(true, client.id, args.buf, {autotrigger = true})
         --end
-        --if client.supports_method('textDocument/formatting') then
-        --    -- Format the current buffer on save
-        --    vim.api.nvim_create_autocmd('BufWritePre', {
-        --        buffer = args.buf,
-        --        callback = function()
-        --            vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-        --        end,
-        --    })
-        --end
+        if client.supports_method('textDocument/formatting') then
+            -- Format the current buffer on save
+            vim.api.nvim_create_autocmd('BufWritePre', {
+                buffer = event.buf,
+                callback = function()
+                    vim.lsp.buf.format({ bufnr = event.buf, id = client.id })
+                end,
+            })
+        end
+        if client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable(true)
+        end
     end,
 })
+
+--vim.lsp.handlers['client/regsiterCapability'] = (function(overridden)
+--    return function(err, res, ctx)
+--        local result = overridden(err, res, ctx)
+--        local client = vim.lsp.get_client_by_id(ctx.client_id)
+--        if not client then
+--            return
+--        end
+--        for bufnr, _ in pairs(client.attached_buffers) do
+--            vim.lsp.inlay_hint.enable()
+--        end
+--        return result
+--    end
+--end)(vim.lsp.handlers['client/registerCapability'])
 
 -- Plugins!
 -- Bootstrap lazy.nvim
@@ -155,36 +172,43 @@ require("lazy").setup({
         'airblade/vim-gitgutter',
         'nvim-treesitter/nvim-treesitter',
         {
-            'junegunn/fzf.vim',
-            dependencies = {
-                { 'junegunn/fzf', dir = '~/.fzf', build = './install --all' },
-            },
-            config = function()
-                -- stop putting a giant window over my editor
-                vim.g.fzf_layout = { down = '~20%' }
-                -- when using :Files, pass the file list through
-                --
-                --   https://github.com/jonhoo/proximity-sort
-                --
-                -- to prefer files closer to the current file.
-                -- function list_cmd()
-                --     local base = vim.fn.fnamemodify(vim.fn.expand('%'), ':h:.:S')
-                --     if base == '.' then
-                --         -- if there is no current file,
-                --         -- proximity-sort can't do its thing
-                --         return 'fd --type file --follow'
-                --     else
-                --         return vim.fn.printf('fd --type file --follow | proximity-sort %s', vim.fn.shellescape(vim.fn.expand('%')))
-                --     end
-                -- end
-                -- vim.api.nvim_create_user_command('Files', function(arg)
-                --     vim.fn['fzf#vim#files'](arg.qargs, { source = list_cmd(), options = '--tiebreak=index' }, arg.bang)
-                -- end, { bang = true, nargs = '?', complete = "dir" })
-                -- vim.api.nvim_create_user_command('Files', function(arg)
-                --     vim.fn['fzf#vim#files'](arg.qargs, { options = '--tiebreak=length' }, arg.bang)
-                -- end, { bang = true, nargs = '?', complete = "dir" })
-            end
+            'ibhagwan/fzf-lua',
+            keys = {
+                { "<C-p>",     "<cmd>FzfLua files<cr>" },
+                { "<leader>;", "<cmd>FzfLua buffers<cr>" }
+            }
         },
+        --{
+        --    'junegunn/fzf.vim',
+        --    dependencies = {
+        --        { 'junegunn/fzf', dir = '~/.fzf', build = './install --all' },
+        --    },
+        --    config = function()
+        --        -- stop putting a giant window over my editor
+        --        vim.g.fzf_layout = { down = '~20%' }
+        --        -- when using :Files, pass the file list through
+        --        --
+        --        --   https://github.com/jonhoo/proximity-sort
+        --        --
+        --        -- to prefer files closer to the current file.
+        --        -- function list_cmd()
+        --        --     local base = vim.fn.fnamemodify(vim.fn.expand('%'), ':h:.:S')
+        --        --     if base == '.' then
+        --        --         -- if there is no current file,
+        --        --         -- proximity-sort can't do its thing
+        --        --         return 'fd --type file --follow'
+        --        --     else
+        --        --         return vim.fn.printf('fd --type file --follow | proximity-sort %s', vim.fn.shellescape(vim.fn.expand('%')))
+        --        --     end
+        --        -- end
+        --        -- vim.api.nvim_create_user_command('Files', function(arg)
+        --        --     vim.fn['fzf#vim#files'](arg.qargs, { source = list_cmd(), options = '--tiebreak=index' }, arg.bang)
+        --        -- end, { bang = true, nargs = '?', complete = "dir" })
+        --        -- vim.api.nvim_create_user_command('Files', function(arg)
+        --        --     vim.fn['fzf#vim#files'](arg.qargs, { options = '--tiebreak=length' }, arg.bang)
+        --        -- end, { bang = true, nargs = '?', complete = "dir" })
+        --    end
+        --},
         'sindrets/diffview.nvim',
         {
             'neovim/nvim-lspconfig',
@@ -209,13 +233,17 @@ require("lazy").setup({
 
                 -- Rust
                 vim.lsp.config("rust_analyzer", {
+                    cmd = { '/Users/niklasdusenlund/.rustup/toolchains/nightly-aarch64-apple-darwin/bin/rust-analyzer' },
                     -- Server-specific settings. See `:help lspconfig-setup`
                     settings = {
                         ["rust-analyzer"] = {
                             cargo = {
                                 -- Use a separate build dir for RA
                                 targetDir = true,
-                                -- allFeatures = true,
+                                buildScripts = {
+                                    enable = true
+                                },
+                                allFeatures = true,
                             },
                             -- imports = {
                             --     group = {
@@ -233,6 +261,9 @@ require("lazy").setup({
                             },
                             procMacro = {
                                 enable = true,
+                            },
+                            server = {
+                                extraEnv = "RA_LOG=info",
                             },
                         },
                     },
@@ -263,7 +294,6 @@ require("lazy").setup({
                 vim.lsp.enable("lua_ls")
 
                 -- Go
-                --lspconfig.gopls.setup {}
                 vim.lsp.enable("gopls")
 
                 -- vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -326,10 +356,50 @@ require("lazy").setup({
             },
         },
         {
-            "ludovicchabant/vim-gutentags",
-            config = function()
-                vim.g.gutentags_file_list_command = 'find . -type f -name "*.c"'
-            end
-        },
+            "NeogitOrg/neogit",
+            dependencies = {
+                "nvim-lua/plenary.nvim",
+                "sindrets/diffview.nvim",
+                "ibhagwan/fzf-lua",
+            },
+            cmd = "Neogit",
+            keys = {
+                { "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
+            }
+        }
+        --{
+        --    "ludovicchabant/vim-gutentags",
+        --    config = function()
+        --        vim.g.gutentags_file_list_command = 'find . -type f -name "*.c"'
+        --    end
+        --},
     },
+    ui = {
+        icons = {
+            cmd = "[CMD] ",
+            config = "[CONFIG] ",
+            debug = "● ",
+            event = "[EVENT] ",
+            favorite = "[FAV] ",
+            ft = "[FT] ",
+            init = "[INIT] ",
+            import = "[IMPORT] ",
+            keys = "[KEYS] ",
+            lazy = "[LAZY] ",
+            loaded = "●",
+            not_loaded = "○",
+            plugin = "[PLUGIN] ",
+            runtime = "[RUNTIME] ",
+            require = "[REQUIRE] ",
+            source = "[SOURCE] ",
+            start = "[START] ",
+            task = "✔ ",
+            list = {
+                "●",
+                "➜",
+                "★",
+                "‒",
+            },
+    	}
+    }
 })
