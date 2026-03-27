@@ -28,6 +28,7 @@
     updateRefs = true
 [alias]
     c = commit
+    ch = !git checkout $(git branch --format='%(refname:short)' | fzf --no-sort)
     s = status
     st = status
     lg = log --oneline
