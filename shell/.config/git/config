@@ -49,9 +49,11 @@
 [pull]
     ff = only
 [push]
-    default = simple
+    default = current
     autoSetupRemote = true
     followTags = true
+[remote]
+    pushDefault = origin
 [fetch]
     prune = true
     all = false
