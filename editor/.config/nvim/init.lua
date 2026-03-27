@@ -208,7 +208,12 @@ require("lazy").setup({
         --        -- end, { bang = true, nargs = '?', complete = "dir" })
         --    end
         --},
-        'sindrets/diffview.nvim',
+        {
+            'dlyongemallo/diffview.nvim',
+            opts = {
+                use_icons = false,
+            },
+        },
         {
             'neovim/nvim-lspconfig',
             event = { "BufReadPre", "BufNewFile" },
@@ -356,7 +361,7 @@ require("lazy").setup({
             "NeogitOrg/neogit",
             dependencies = {
                 "nvim-lua/plenary.nvim",
-                "sindrets/diffview.nvim",
+                "dlyongemallo/diffview.nvim",
                 "ibhagwan/fzf-lua",
             },
             cmd = "Neogit",

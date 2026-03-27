@@ -31,6 +31,8 @@
     ch = !git checkout $(git branch --format='%(refname:short)' | fzf --no-sort)
     s = status
     st = status
+    dv = diffview
+    diffview = "!f() { nvim -c \"DiffviewOpen ${1:-HEAD}\"; }; f"
     lg = log --oneline
     last = log -1 HEAD
     cl = log -p -- ':(exclude)Cargo.lock'
